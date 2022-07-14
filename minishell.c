@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/07/13 20:48:28 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/07/14 20:49:18 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
-		
+		init_shell();
 	}
 	return (0);
 }
