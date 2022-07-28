@@ -6,13 +6,14 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/07/14 20:48:13 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:14:34 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdio.h>
+# include <fcntl.h>
 
 typedef struct s_list{
 	int				data;
