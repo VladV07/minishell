@@ -23,6 +23,8 @@ LIST =  minishell.c \
 
 LIBFT = -Llibft -lft
 
+READLINE = -lreadline
+
 OBJS = $(patsubst %.c,%.o,$(LIST))
 
 FLAGS = -Wall -Wextra -Werror
@@ -32,7 +34,7 @@ FLAGS = -Wall -Wextra -Werror
 all : $(NAME) $(HEADER)
 
 $(NAME) : $(OBJS)
-	cc $(FLAGS) $(OBJS) $(LIBFT) -I $(HEADER) -o $@
+	cc $(FLAGS) $(OBJS) $(LIBFT) $(READLINE) -I $(HEADER) -o $@
 
 %.o : %.c $(HEADER)
 	cc $(FLAGS) -c $< -o $@ -I ${HEADER}

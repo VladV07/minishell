@@ -6,14 +6,17 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/07/28 21:27:03 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/07/29 20:30:30 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <stdlib.h>
+# include <readline/readline.h>
 # include "libft/libft.h"
 
 typedef struct s_list{
