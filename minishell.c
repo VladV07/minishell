@@ -6,18 +6,94 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/07/29 21:46:21 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/01 21:20:39 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <string.h>
+#include <string.h>  // потом убрать
 
 t_data	g_sh;
 
 void	init_shell(void)
 {
 	g_sh.stop_flag = 0;
+}
+
+int	is_key(char ch)
+{
+	if (ch == '_' || ft_isalnum(ch))
+	{
+		return (1);
+	}
+	return (0);
+}
+
+int	ln_env(char *env_j)
+{
+	int	i;
+
+	i = 0;
+	while (env_j[i] != '=' && env_j[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*get_in_env(char *str, int *i, char **env)
+{
+	int		nb_dollar;
+	int		j;
+	char	*key;
+	char	*tmp;
+
+	nb_dollar = *i;
+	while (str[*i] != '\0')
+	{
+		(*i)++;
+		if (!is_key(str[*i]))
+			break ;
+	}
+	if (*i == nb_dollar + 1)
+		return (str);
+	key = ft_substr(str, nb_dollar + 1, *i - nb_dollar - 1);
+	j = -1;
+	while (env[++j])
+	{
+		if (strstr(env[j], key)) //нет в библиотеке ft_ 
+		{
+			tmp = ft_substr(env[j], 0, ln_env(env[j]));
+			if (strcmp(key, tmp) == 0) //нет в библиотеке ft_ 
+				break ;
+		}
+	}
+	tmp = ft_substr(env[j], ln_env(env[j]) + 1, ft_strlen(env[j]) - ln_env(env[j]));
+	printf("tmp = %s\n", tmp);
+	return (tmp);
+}
+
+char	*get_dollar(char *str, int *i, char **env)
+{
+	int		cop_i;
+	char	*key_znach;
+	char	*str_tmp1;
+	char	*str_tmp2;
+
+	cop_i = *i;
+	key_znach = get_in_env(str, &cop_i, env);
+	str_tmp1 = ft_substr(str, 0, *i);
+	str_tmp1 = ft_strjoin(str_tmp1, key_znach);
+	while (str[*i] != '\0')
+	{
+		(*i)++;
+		if (!is_key(str[*i]))
+			break ;
+	}
+	str_tmp2 = ft_strdup(str + *i + 1);
+	str_tmp1 = ft_strjoin(str_tmp1, str_tmp2);
+	free(key_znach);
+	free(str_tmp2);
+	free(str);
+	return (str_tmp1);
 }
 
 char	*get_quote(char *str, int *i)
@@ -42,32 +118,94 @@ char	*get_quote(char *str, int *i)
 	free(str_tmp2);
 	free(str_tmp3);
 	free(str);
+	printf("str_tmp1 = %s\n", str_tmp1);
 	return (str_tmp1);
 }
 
-void	parser(char *str)
+char	*get_slesh(char *str, int *i)
 {
+	int		nb_slesh;
+	char	*str_tmp1;
+	char	*str_tmp2;
+
+	nb_slesh = *i;
+	str_tmp1 = ft_substr(str, 0, nb_slesh);
+	str_tmp2 = ft_strdup(str + nb_slesh + 1);
+	str_tmp1 = ft_strjoin(str_tmp1, str_tmp2);
+	free(str_tmp2);
+	free(str);
+	(*i)++;
+	printf("str_tmp1 = %s\n", str_tmp1);
+	return (str_tmp1);
+}
+
+char	*get_double_quotes(char *str, int *i, char **env)
+{
+	int		double_quote;
+	char	*str_tmp1;
+	char	*str_tmp2;
+	char	*str_tmp3;
+
+	double_quote = *i;
+	while (str[*i] != '\0')
+	{
+		(*i)++;
+		if (str[*i] == '\\' && (str[*i + 1] == '$' || \
+				str[*i + 1] == '\"' || str[*i + 1] == '\\'))
+			str = get_slesh(str, i);
+		if (str[*i] == '$')
+			get_dollar(str, i, env);
+		if (str[*i] == '\"')
+			break ;
+	}
+	str_tmp1 = ft_substr(str, 0, double_quote);
+	str_tmp2 = ft_substr(str, double_quote + 1, *i - double_quote - 1);
+	str_tmp3 = ft_strdup(str + *i + 1);
+	str_tmp1 = ft_strjoin(str_tmp1, str_tmp2);
+	str_tmp1 = ft_strjoin(str_tmp1, str_tmp3);
+	free(str_tmp2);
+	free(str_tmp3);
+	free(str);
+	printf("str_tmp1 = %s\n", str_tmp1);
+	return (str_tmp1);
+}
+
+void	parser(char *str, char **env)
+{
+	/* тут последовательно перебираем '' \ "" $ ; | > >> < ' '*/
 	int	i;
 
 	i = 0;
+	printf("str = %s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '\'')
-			get_quote(str, &i);
+			str = get_quote(str, &i);
+		if (str[i] == '\\')
+			str = get_slesh(str, &i);
+		if (str[i] == '\"')
+			str = get_double_quotes(str, &i, env);
+		if (str[i] == '$')
+			str = get_dollar(str, &i, env);
 		i++;
 	}
+	printf("str = %s\n", str);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
 	char	*str;
 
-	str = strdup("1com'2man'3dddd");
+	(void)argc;
+	(void)argv;
+	str = strdup("co$USER mma'n\\nn\'dd000\\\'00co\"mm\\\"\"an\'dddd\'a");
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
 		init_shell();
-		parser(str);
+		//lector(str);
+		parser(str, env);
+		g_sh.stop_flag = 1;
 	}
 	return (0);
 }
