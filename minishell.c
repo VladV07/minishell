@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/01 21:20:39 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/03 21:51:17 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,9 @@ char	*get_double_quotes(char *str, int *i, char **env)
 void	parser(char *str, char **env)
 {
 	/* тут последовательно перебираем '' \ "" $ ; | > >> < ' '*/
-	int	i;
+	char	**str_pars_tmp = NULL;
+	char	***str_pars = NULL;
+	int		i;
 
 	i = 0;
 	printf("str = %s\n", str);
@@ -190,6 +192,28 @@ void	parser(char *str, char **env)
 		i++;
 	}
 	printf("str = %s\n", str);
+	str_pars_tmp = ft_split(str, ';');
+	printf("str_pars_tmp = %s\n", str_pars_tmp[0]);
+	printf("str_pars_tmp = %s\n", str_pars_tmp[1]);
+	printf("str_pars_tmp = %s\n", str_pars_tmp[2]);
+	i = 0;
+	str_pars = malloc(10000); // нужно правильно посчитать и выделить память
+	while (str_pars_tmp[i])
+	{
+		str_pars_tmp[i] = ft_strtrim(str_pars_tmp[i], " "); // добавить невидемые символы и хз нужна ли вообще
+		str_pars[i] = ft_split(str_pars_tmp[i], ' ');
+		i++;
+	}
+	str_pars[i] = NULL;
+	printf("str_pars = %s\n", str_pars[0][0]);
+	printf("str_pars = %s\n", str_pars[1][0]);
+	printf("str_pars = %s\n", str_pars[2][0]);
+	printf("str_pars = %s\n", str_pars[0][1]);
+	printf("str_pars = %s\n", str_pars[1][1]);
+	printf("str_pars = %s\n", str_pars[2][1]);
+	printf("str_pars = %s\n", str_pars[0][2]);
+	printf("str_pars = %s\n", str_pars[1][2]);
+	printf("str_pars = %s\n", str_pars[2][2]);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -198,7 +222,8 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	str = strdup("co$USER mma'n\\nn\'dd000\\\'00co\"mm\\\"\"an\'dddd\'a");
+	//str = strdup("co$USER mma'n\\nn\'dd000\\\'00co\"mm\\\"\"an\'dddd\'a");
+	str = strdup("   1 2 3; 4 55555 6    ;7 888   9");
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
