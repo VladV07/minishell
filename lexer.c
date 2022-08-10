@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/08/10 21:00:53 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:13:09 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_check(char *str)
 {
 	int	len;
 
+	str = ft_strtrim(str, " ");
 	len = ft_strlen(str);
 	if (str[len - 1] == '&' || str[len - 1] == '|'
 		||str[len - 1] == '>' || str[len - 1] == '<')
