@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/08/10 20:47:44 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:13:09 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_check(char *str)
+{
+	int	len;
+
+	str = ft_strtrim(str, " ");
+	len = ft_strlen(str);
+	if (str[len - 1] == '&' || str[len - 1] == '|'
+		||str[len - 1] == '>' || str[len - 1] == '<')
+		return (1);
+	return (0);
+}
 
 int	lexer(char *str)
 {
@@ -20,6 +32,8 @@ int	lexer(char *str)
 	char	*new_str;
 	char	*c;
 
+	if (ft_check(str))
+		return (1);
 	field = 0;
 	exp_field = 0;
 	i = -1;
@@ -33,10 +47,8 @@ int	lexer(char *str)
 			field++;
 		else if (str[i] == 39)
 			exp_field++;
-		if (str[i] == ' ' && (str[i + 1] == ' ') && ((field % 2) == 0) \
-							&& ((exp_field % 2) == 0))
-			;
-		else if ((str[i] >= 9) && (str[i] <= 13))
+		if ((str[i] == ' ' && (str[i + 1] == ' ') && ((field % 2) == 0) \
+				&& ((exp_field % 2) == 0)) || ((str[i] >= 9) && (str[i] <= 13)))
 			;
 		else
 		{
@@ -46,5 +58,6 @@ int	lexer(char *str)
 	}
 	free(c);
 	g_sh.str = new_str;
+	free(new_str);
 	return (0);
 }
