@@ -22,6 +22,7 @@ LIST =  minishell.c \
 		ft_lstnew.c \
 		ft_pushback.c \
 		ft_readline.c \
+		ft_strjoin_free.c \
 		$(PARSER)get_dollar.c \
 		$(PARSER)get_double_quotes.c \
 		$(PARSER)get_in_env.c \
