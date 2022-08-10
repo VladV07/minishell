@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/08/10 18:41:49 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:28:38 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*lexer(char *str)
 			field++;
 		else if (str[i] == 39)
 			exp_field++;
-		if (str[i] == ' ' && (str[i + 1] == ' ') && ((field % 2) == 0) && ((exp_field % 2) == 0))\
+		if (str[i] == ' ' && (str[i + 1] == ' ') && ((field % 2) == 0) \
+							&& ((exp_field % 2) == 0))
 			;
 		else if ((str[i] >= 9) && (str[i] <= 13))
 			;
@@ -44,15 +45,5 @@ char	*lexer(char *str)
 		}
 	}
 	free(c);
-	return(new_str);
-}
-
-int main()
-{
-	char	*str;
-	str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
-	printf("%s\n", str);
-	str = lexer(str);
-	printf("%s\n", str);
-	return(0);
+	return (new_str);
 }
