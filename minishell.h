@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/09 19:06:25 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:40:27 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ typedef struct s_data{
 	int			stop_flag;
 }	t_data;
 
+t_data	g_sh;
+
 char	*ft_readline(char *p);
+int		is_key(char ch);
+int		ln_env(char *env_j);
+char	*get_in_env(char *str, int *i, char **env);
+char	*get_dollar(char *str, int *i, char **env);
+char	*get_quote(char *str, int *i);
+char	*get_slesh(char *str, int *i);
+char	*get_double_quotes(char *str, int *i, char **env);
+void	parser(char *str, char **env);
 
 #endif

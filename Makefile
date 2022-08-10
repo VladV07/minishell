@@ -14,12 +14,22 @@ NAME = minishell
 
 HEADER = minishell.h
 
+PARSER = parser/
+
 LIST =  minishell.c \
 		ft_lstclear.c \
 		ft_lstlast.c \
 		ft_lstnew.c \
 		ft_pushback.c \
-		ft_readline.c
+		ft_readline.c \
+		$(PARSER)get_dollar.c \
+		$(PARSER)get_double_quotes.c \
+		$(PARSER)get_in_env.c \
+		$(PARSER)get_quote.c \
+		$(PARSER)get_slesh.c \
+		$(PARSER)is_key.c \
+		$(PARSER)ln_env.c \
+		$(PARSER)parser.c 
 
 LIBFT = -Llibft -lft
 
