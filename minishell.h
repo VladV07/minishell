@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/07/29 20:30:30 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:41:55 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ typedef struct s_data{
 }	t_data;
 
 char	*ft_readline(char *p);
+char	*ft_strjoin_free(char *s1, char const *s2);
 
 #endif

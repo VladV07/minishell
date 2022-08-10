@@ -19,7 +19,8 @@ LIST =  minishell.c \
 		ft_lstlast.c \
 		ft_lstnew.c \
 		ft_pushback.c \
-		ft_readline.c
+		ft_readline.c \
+		ft_strjoin_free.c
 
 LIBFT = -Llibft -lft
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/01 21:20:39 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:15:20 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,15 +195,14 @@ void	parser(char *str, char **env)
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
-
+	
 	(void)argc;
 	(void)argv;
 	str = strdup("co$USER mma'n\\nn\'dd000\\\'00co\"mm\\\"\"an\'dddd\'a");
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
-		init_shell();
-		//lector(str);
+		str = lexer(str);
 		parser(str, env);
 		g_sh.stop_flag = 1;
 	}
