@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 18:48:40 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:19:18 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_shell(void)
 	g_sh.res_pars = NULL;
 }
 
-/* тут последовательно перебираем '' \ "" $ ; | > >> < ' ' */
+/* тут последовательно перебираем '' \ "" $ ; | > >> < ' '  */
 /* get_in_env.c убрать #include <string.h> */
 
 int	main(int argc, char **argv, char **env)
