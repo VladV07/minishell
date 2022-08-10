@@ -6,13 +6,13 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/08/10 20:28:38 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:47:44 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*lexer(char *str)
+int	lexer(char *str)
 {
 	int		i;
 	int		field;
@@ -45,5 +45,6 @@ char	*lexer(char *str)
 		}
 	}
 	free(c);
-	return (new_str);
+	g_sh.str = new_str;
+	return (0);
 }

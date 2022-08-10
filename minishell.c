@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 20:30:08 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:48:19 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,18 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
+	(void)env;
 	//g_sh.str = strdup("co$USER mma'n\\nn\'dd000\\\'00co\"mm\\\"\"an\'dddd\'a");
-	g_sh.str = strdup(" 1 2 3| 4 55555 6 |7 888 9");
-	//str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
+	g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9");
+	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
+	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
-		g_sh.str = lexer(g_sh.str);
+		lexer(g_sh.str);
 		//lector(g_sh.str);
 		printf("g_sh.str= %s\n", g_sh.str);
-		//parser(g_sh.str, env);
+		parser(g_sh.str, env);
 		g_sh.stop_flag = 1;
 	}
 	return (0);

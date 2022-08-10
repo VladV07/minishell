@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 19:19:26 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:48:05 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ char	*get_quote(char *str, int *i);
 char	*get_slesh(char *str, int *i);
 char	*get_double_quotes(char *str, int *i, char **env);
 void	parser(char *str, char **env);
+int		lexer(char *str);
 
 #endif
