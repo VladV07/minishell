@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:37:47 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 18:46:25 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:06:37 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	parser(char *str, char **env)
 	int		size_str_pars_tmp;
 
 	i = 0;
-	printf("str = %s\n", str);
+	printf("parser: str = %s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '\'')
@@ -32,16 +32,16 @@ void	parser(char *str, char **env)
 			str = get_dollar(str, &i, env);
 		i++;
 	}
-	printf("str = %s\n", str);
+	printf("parser: str = %s\n", str);
 	str_pars_tmp = ft_split(str, '|');
-	printf("str_pars_tmp = %s\n", str_pars_tmp[0]);
-	printf("str_pars_tmp = %s\n", str_pars_tmp[1]);
-	printf("str_pars_tmp = %s\n", str_pars_tmp[2]);
+	printf("parser: str_pars_tmp = %s\n", str_pars_tmp[0]);
+	printf("parser: str_pars_tmp = %s\n", str_pars_tmp[1]);
+	printf("parser: str_pars_tmp = %s\n", str_pars_tmp[2]);
 	i = -1;
 	size_str_pars_tmp = 0;
 	while (str_pars_tmp[++i])
 		size_str_pars_tmp = size_str_pars_tmp + ft_strlen(str_pars_tmp[i]);
-	printf("size_str_pars_tmp = %d\n", size_str_pars_tmp);
+	printf("parser: size_str_pars_tmp = %d\n", size_str_pars_tmp);
 	i = 0;
 	g_sh.res_pars = (char ***)malloc(sizeof(char ***) * \
 								(size_str_pars_tmp + 1));
@@ -55,13 +55,13 @@ void	parser(char *str, char **env)
 	}
 	g_sh.res_pars[i] = NULL;
 	free(str_pars_tmp);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[0][0]);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[1][0]);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[2][0]);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[0][1]);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[1][1]);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[2][1]);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[0][2]);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[1][2]);
-	printf("g_sh.res_pars = %s\n", g_sh.res_pars[2][2]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[0][0]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[1][0]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[2][0]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[0][1]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[1][1]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[2][1]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[0][2]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[1][2]);
+	printf("parser: g_sh.res_pars = %s\n", g_sh.res_pars[2][2]);
 }

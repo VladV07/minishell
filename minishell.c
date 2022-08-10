@@ -28,6 +28,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)env;
 	//g_sh.str = strdup("co$USER mma'n\\nn\'dd000\\\'00co\"mm\\\"\"an\'dddd\'a");
+	//g_sh.str = strdup("\"8\"8\"8\"");
+	//g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9");
 	g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9|            ");
 	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
 	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
