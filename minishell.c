@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 21:12:11 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:34:09 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,28 @@ void	init_shell(void)
 
 int	main(int argc, char **argv, char **env)
 {
+	int	ch_err;
+
 	(void)argc;
 	(void)argv;
-	(void)env;
 	//g_sh.str = strdup("co$USER mma'n\\nn\'dd000\\\'00co\"mm\\\"\"an\'dddd\'a");
 	//g_sh.str = strdup("\"8\"8\"8\"");
 	//g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9");
-	g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9|            ");
+	g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9>1            ");
 	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
 	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
-		lexer(g_sh.str);
-		//lector(g_sh.str);
-		printf("g_sh.str= %s\n", g_sh.str);
-		parser(g_sh.str, env);
-		g_sh.stop_flag = 1;
+		ch_err = lexer(g_sh.str);
+		if (!ch_err)
+		{
+			printf("g_sh.str= %s\n", g_sh.str);
+			parser(g_sh.str, env);
+			g_sh.stop_flag = 1;
+		}
+		else
+			printf("command error\n");
 	}
 	return (0);
 }
