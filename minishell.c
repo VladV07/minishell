@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
 /*   Updated: 2022/08/10 18:48:40 by stapioca         ###   ########.fr       */
@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **env)
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
+		g_sh.str = lexer(g_sh.str);
 		//lector(g_sh.str);
 		parser(g_sh.str, env);
 		g_sh.stop_flag = 1;
