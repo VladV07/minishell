@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 18:41:55 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/08/10 19:19:26 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_list{
 
 typedef struct s_data{
 	char		comands[7];
+	char		*str;
+	char		***res_pars;
 	char		**env;
 	t_list		env_list;
 	int			stop_flag;
