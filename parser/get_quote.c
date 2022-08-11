@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:32:53 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 18:46:08 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/11 20:41:30 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ char	*get_quote(char *str, int *i)
 	str_tmp3 = ft_strdup(str + *i + 1);
 	str_tmp1 = ft_strjoin(str_tmp1, str_tmp2);
 	str_tmp1 = ft_strjoin(str_tmp1, str_tmp3);
+	printf("get_double_quotes: str_tmp1 = %s\n", str_tmp1);
 	free(str_tmp2);
 	free(str_tmp3);
-	free(str);
+	//free(str);
+	(*i) = (*i) - 2;
 	return (str_tmp1);
 }

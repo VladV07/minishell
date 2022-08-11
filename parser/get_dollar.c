@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:29:43 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 18:45:39 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/11 20:16:22 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ char	*get_dollar(char *str, int *i, char **env)
 	}
 	str_tmp2 = ft_strdup(str + *i + 1);
 	str_tmp1 = ft_strjoin(str_tmp1, str_tmp2);
+	printf("get_dollar: str_tmp1 = %s\n", str_tmp1);
 	free(key_znach);
 	free(str_tmp2);
-	free(str);
+	//free(str);
 	return (str_tmp1);
 }
