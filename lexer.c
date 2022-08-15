@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/08/10 21:13:09 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/08/15 14:41:35 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ int	lexer(char *str)
 		if ((str[i] == ' ' && (str[i + 1] == ' ') && ((field % 2) == 0) \
 				&& ((exp_field % 2) == 0)) || ((str[i] >= 9) && (str[i] <= 13)))
 			;
+		else if ((str[i] == '>' || str[i] == '<' || str[i] == '&' \
+				|| str[i] == '|') && str[i - 1] != ' ')
+		{
+			c[0] = ' ';
+			new_str = ft_strjoin_free(new_str, c);
+			c[0] = str[i];
+			new_str = ft_strjoin_free(new_str, c);
+			if ((str[i] == '>' || str[i] == '<' || str[i] == '&' \
+				|| str[i] == '|') && str[i + 1] != ' ')
+			{
+				c[0] = ' ';
+				new_str = ft_strjoin_free(new_str, c);
+			}
+		}
 		else
 		{
 			c[0] = str[i];

@@ -33,7 +33,7 @@ LIST =  minishell.c \
 		$(PARSER)ln_env.c \
 		$(PARSER)parser.c 
 
-LIBFT = -Llibft -lft
+LIBFT = ./libft/libft.a 
 
 READLINE = -lreadline
 
@@ -43,7 +43,10 @@ FLAGS = -Wall -Wextra -Werror
 
 .PHONY : all clean fclean re
 
-all : $(NAME) $(HEADER)
+all : lib $(NAME) $(HEADER)
+
+lib :
+	@make -C ./libft
 
 $(NAME) : $(OBJS)
 	cc $(FLAGS) $(OBJS) $(LIBFT) $(READLINE) -I $(HEADER) -o $@
@@ -53,8 +56,10 @@ $(NAME) : $(OBJS)
 
 clean :
 	@rm -f $(OBJS)
+	@make clean -C libft
 
 fclean : clean
 	@rm -f $(NAME)
+	@make fclean -C libft
 
 re : fclean all
