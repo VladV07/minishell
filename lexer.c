@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/08/15 14:41:35 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:06:41 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	lexer(char *str)
 		}
 	}
 	free(c);
+	free(g_sh.str);
 	g_sh.str = new_str;
-	free(new_str);
 	return (0);
 }

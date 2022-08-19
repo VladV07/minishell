@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:35:55 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/11 21:29:23 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:03:14 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,24 @@ char	*get_double_quotes(char *str, int *i, char **env)
 
 	double_quote = *i;
 	//printf("get_double_quotes: double_quote = %d\n", double_quote);
+	str_tmp1 = ft_substr(str, 0, double_quote);
+	printf("get_double_quotes: str_tmp1 = %s\n", str_tmp1);
 	while (str[*i] != '\0')
 	{
 		(*i)++;
+		printf("get_double_quotes: (*i) = %d\n", (*i));
 		//printf("get_double_quotes: (*i) = %d\n", (*i));
 		/*if (str[*i] == '\\' && (str[*i + 1] == '$' || \
 				str[*i + 1] == '\"' || str[*i + 1] == '\\'))
 			str = get_slesh(str, i);*/
 		if (str[*i] == '$')
-			get_dollar(str, i, env);
+		{
+			str = get_dollar(str, i, env);
+			printf("get_double_quotes: str_tmp1 = %s\n", str_tmp1);
+		}
 		if (str[*i] == '\"')
 			break ;
 	}
-	str_tmp1 = ft_substr(str, 0, double_quote);
-	//printf("get_double_quotes: str_tmp1 = %s\n", str_tmp1);
 	str_tmp2 = ft_substr(str, double_quote + 1, *i - double_quote - 1);
 	//printf("get_double_quotes: str_tmp2 = %s\n", str_tmp2);
 	str_tmp3 = ft_strdup(str + *i + 1);
