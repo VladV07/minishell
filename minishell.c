@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/21 17:47:51 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/21 20:43:51 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,18 @@
 void	init_shell(void)
 {
 	g_sh.stop_flag = 0;
+	g_sh.plase_redirect = 0;
 	g_sh.res_pars = NULL;
+	g_sh.redirect = NULL;
+	g_sh.cmd_and_args = NULL;
 	g_sh.commands[0] = ft_strdup("echo");
+	g_sh.commands[1] = ft_strdup("cd");
+	g_sh.commands[2] = ft_strdup("pwd");
+	g_sh.commands[3] = ft_strdup("export");
+	g_sh.commands[4] = ft_strdup("unset");
+	g_sh.commands[5] = ft_strdup("env");
+	g_sh.commands[6] = ft_strdup("exit");
+	g_sh.commands[7] = NULL;
 }
 
 /* тут последовательно перебираем '' \ "" $ ; | > >> < ' '  */
