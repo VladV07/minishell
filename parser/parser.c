@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:37:47 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/19 21:45:29 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:44:05 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,85 @@ void	print_arr_g_sh_res_pars(void)
 	}
 }
 
+char	*kostyl1(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+		{
+			i++;
+			while (str[i] != '\'')
+			{
+				if (str[i] == ' ')
+					str[i] = '\t';
+				i++;
+			}
+		}
+		i++;
+	}
+	return (str);
+}
+
+char	*kostyl2(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+		{
+			i++;
+			while (str[i] != '\"')
+			{
+				if (str[i] == ' ')
+					str[i] = '\t';
+				i++;
+			}
+		}
+		i++;
+	}
+	return (str);
+}
+
+void	kostyl_return(void)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	while (g_sh.res_pars[i])
+	{
+		j = 0;
+		while (g_sh.res_pars[i][j])
+		{
+			k = 0;
+			while (g_sh.res_pars[i][j][k])
+			{
+				if (g_sh.res_pars[i][j][k] == '\t')
+					g_sh.res_pars[i][j][k] = ' ';
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	parser(char *str, char **env)
 {
 	char	**str_pars_tmp;
 	int		i;
-	//int		j;
 	int		size_str_pars_tmp;
 
-	i = 0;
 	printf("parser: str = %s\n", str);
+	str = kostyl1(str);
+	str = kostyl2(str);
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '\'')
@@ -55,9 +125,6 @@ void	parser(char *str, char **env)
 	printf("parser: str = %s\n", str);
 	str_pars_tmp = ft_split(str, '|');
 	printf("parser: str_pars_tmp[0] = %s\n", str_pars_tmp[0]);
-	//printf("parser: str_pars_tmp[1] = %s\n", str_pars_tmp[1]);
-	//printf("parser: str_pars_tmp[2] = %s\n", str_pars_tmp[2]);
-	//printf("parser: str_pars_tmp[3] = %s\n", str_pars_tmp[3]);
 	i = -1;
 	size_str_pars_tmp = 0;
 	while (str_pars_tmp[++i])
@@ -76,27 +143,7 @@ void	parser(char *str, char **env)
 	}
 	g_sh.res_pars[i] = NULL;
 	print_arr_g_sh_res_pars();
-	/*
-	i = 0;
-	while (g_sh.res_pars[i])
-	{
-		j = 0;
-		while (g_sh.res_pars[i][j])
-		{
-			if (g_sh.res_pars[i][j] == '\'')
-				g_sh.res_pars = get_quote(g_sh.res_pars, &j);
-			if (g_sh.res_pars[i][j] == '\\')
-				g_sh.res_pars = get_slesh(g_sh.res_pars, &j);
-			if (g_sh.res_pars[i][j] == '\"')
-				g_sh.res_pars = get_double_quotes(g_sh.res_pars, &j, env);
-			if (g_sh.res_pars[i][j] == '$')
-				g_sh.res_pars = get_dollar(g_sh.res_pars, &j, env);
-			j++;
-			//printf("parser: i = %d\n", i);
-		}
-		i++;
-	}
+	kostyl_return();
 	print_arr_g_sh_res_pars();
-	*/
 	free(str_pars_tmp);
 }
