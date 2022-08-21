@@ -6,17 +6,17 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/19 17:47:26 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:47:51 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <string.h>  // потом убрать
 
 void	init_shell(void)
 {
 	g_sh.stop_flag = 0;
 	g_sh.res_pars = NULL;
+	g_sh.commands[0] = ft_strdup("echo");
 }
 
 /* тут последовательно перебираем '' \ "" $ ; | > >> < ' '  */
@@ -46,6 +46,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			printf("g_sh.str= %s\n", g_sh.str);
 			parser(g_sh.str, env);
+			executor(g_sh.res_pars, env);
 			//g_sh.stop_flag = 1;
 		}
 		else

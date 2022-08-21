@@ -31,7 +31,9 @@ LIST =  minishell.c \
 		$(PARSER)get_slesh.c \
 		$(PARSER)is_key.c \
 		$(PARSER)ln_env.c \
-		$(PARSER)parser.c 
+		$(PARSER)parser.c \
+		executor.c
+
 
 LIBFT = ./libft/libft.a 
 

@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:35:55 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/19 20:03:14 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/21 18:07:57 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*get_double_quotes(char *str, int *i, char **env)
 	while (str[*i] != '\0')
 	{
 		(*i)++;
+		if (str[*i] == ' ')
+			str[*i] = '\t';
 		printf("get_double_quotes: (*i) = %d\n", (*i));
 		//printf("get_double_quotes: (*i) = %d\n", (*i));
 		/*if (str[*i] == '\\' && (str[*i + 1] == '$' || \

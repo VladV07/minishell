@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/19 18:59:14 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:47:57 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include "libft/libft.h"
+# include <string.h>  // потом убрать
 
 typedef struct s_list{
 	int				data;
@@ -26,7 +27,7 @@ typedef struct s_list{
 }	t_list;
 
 typedef struct s_data{
-	char		comands[7];
+	char		*commands[7];
 	char		*str;
 	char		***res_pars;
 	char		**env;
@@ -47,5 +48,6 @@ char	*get_slesh(char *str, int *i);
 char	*get_double_quotes(char *str, int *i, char **env);
 void	parser(char *str, char **env);
 int		lexer(char *str);
+void	executor(char ***res_pars, char **env);
 
 #endif

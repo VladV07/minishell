@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:32:53 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/11 20:41:30 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/21 18:07:29 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*get_quote(char *str, int *i)
 	while (str[*i] != '\0')
 	{
 		(*i)++;
+		if (str[*i] == ' ')
+			str[*i] = '\t';
 		if (str[*i] == '\'')
 			break ;
 	}
