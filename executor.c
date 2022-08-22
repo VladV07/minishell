@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/21 21:49:38 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:10:07 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,86 +31,60 @@ void	do_command(char **cmd_and_args, int nb_command)
 }
 */
 
-void	print_arr_g_sh_cmd_and_args(void)
+int	do_split_redirections(char **res_pars, int i, int count, char *redir)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	while (g_sh.cmd_and_args[i] != NULL)
+	if (strcmp(res_pars[i], redir) == 0) // заменить на ft_strcmp
 	{
-		printf("g_sh.cmd_and_args[%d]=%s\n", i, g_sh.cmd_and_args[i]);
-		i++;
+		j = -1;
+		while (++j < i)
+			g_sh.ex_list[count].cmd_and_args[j] = res_pars[j];
+		g_sh.ex_list[count].cmd_and_args[j] = NULL;
+		g_sh.ex_list[count].redirect = ft_strdup(redir);
+		j = 0;
+		g_sh.plase_redirect = i + 1;
+		return (0);
 	}
+	return (1);
 }
 
-char	**split_redirections(char **res_pars)
+void	do_split_redirections_end(char **res_pars, int i, int count)
+{
+	int	j;
+
+	if (res_pars[i + 1] == NULL)
+	{
+		j = -1;
+		while (++j <= i)
+			g_sh.ex_list[count].cmd_and_args[j] = res_pars[j];
+		g_sh.ex_list[count].cmd_and_args[j] = NULL;
+	}
+	g_sh.plase_redirect = 0;
+	g_sh.ex_list[count].redirect = NULL;
+}
+
+char	**split_redirections(char **res_pars, int count)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	free(g_sh.cmd_and_args[0]);
-	free(g_sh.cmd_and_args[1]);
-	free(g_sh.cmd_and_args);
-	g_sh.cmd_and_args = malloc(10000);
+	g_sh.ex_list[count].cmd_and_args = malloc(1000); // посчитать выделение памяти
+	g_sh.ex_list[count].redirect = malloc(10); // посчитать выделение памяти
 	while (res_pars[i])
 	{
 		printf("res_pars[%d]= %s\n", i, res_pars[i]);
-		if (strcmp(res_pars[i], "<") == 0) // заменить на ft_strcmp
-		{
-			j = -1;
-			while (++j < i)
-				g_sh.cmd_and_args[j] = res_pars[j];
-			g_sh.cmd_and_args[j] = NULL;
-			g_sh.redirect = ft_strdup("<");
-			j = 0;
-			g_sh.plase_redirect = i + 1;
-			//res_pars = res_pars + i + 1;
+		if (do_split_redirections(res_pars, i, count, "<") == 0)
 			break ;
-		}
-		if (strcmp(res_pars[i], "<<") == 0) // заменить на ft_strcmp
-		{
-			j = -1;
-			while (++j < i)
-				g_sh.cmd_and_args[j] = res_pars[j];
-			g_sh.cmd_and_args[j] = NULL;
-			g_sh.redirect = ft_strdup("<<");
-			g_sh.plase_redirect = i + 1;
-			//res_pars = res_pars + i + 1;
+		if (do_split_redirections(res_pars, i, count, "<<") == 0)
 			break ;
-		}
-		if (strcmp(res_pars[i], ">") == 0) // заменить на ft_strcmp
-		{
-			j = -1;
-			while (++j < i)
-				g_sh.cmd_and_args[j] = res_pars[j];
-			g_sh.cmd_and_args[j] = NULL;
-			g_sh.redirect = ft_strdup(">");
-			g_sh.plase_redirect = i + 1;
-			//res_pars = res_pars + i + 1;
+		if (do_split_redirections(res_pars, i, count, ">") == 0)
 			break ;
-		}
-		if (strcmp(res_pars[i], ">>") == 0) // заменить на ft_strcmp
-		{
-			j = -1;
-			while (++j < i)
-				g_sh.cmd_and_args[j] = res_pars[j];
-			g_sh.cmd_and_args[j] = NULL;
-			g_sh.redirect = ft_strdup(">>");
-			g_sh.plase_redirect = i + 1;
-			//res_pars = res_pars + i + 1;
+		if (do_split_redirections(res_pars, i, count, ">>") == 0)
 			break ;
-		}
-		if (res_pars[i + 1] == NULL)
-		{
-			j = -1;
-			while (++j <= i)
-				g_sh.cmd_and_args[j] = res_pars[j];
-			g_sh.cmd_and_args[j] = NULL;
-		}
-		g_sh.plase_redirect = 0;
-		g_sh.redirect = NULL;
+		do_split_redirections_end(res_pars, i, count);
 		i++;
 	}
 	return (res_pars);
@@ -120,17 +94,18 @@ void	executor(char ***res_pars, char **env)
 {
 	int		i;
 	int		j;
+	int		count;
 	int		get_command;
 
 	(void)env;
 	get_command = 0;
 	i = 0;
-	g_sh.cmd_and_args = malloc(10000); // посчитать выделение памяти
+	count = 0;
+	g_sh.ex_list = malloc(sizeof(t_execut) * 10); // посчитать выделение памяти
 	while (res_pars[i])
 	{
-		// {{echo}, {123}, {<}, {123}}
-		res_pars[i] = split_redirections(res_pars[i]);
-		print_arr_g_sh_cmd_and_args();
+		res_pars[i] = split_redirections(res_pars[i], count);
+	/*
 		printf("g_sh.redirect= %s\n", g_sh.redirect);
 		j = 0;
 		get_command = 0;
@@ -148,10 +123,23 @@ void	executor(char ***res_pars, char **env)
 		}
 		if (get_command == 0)
 			printf("minishell: %s: command not found\n", g_sh.cmd_and_args[0]);
+	*/
 		res_pars[i] = res_pars[i] + g_sh.plase_redirect;
-		//i = g_sh.plase_redirect - 1;
-		if (!g_sh.redirect)
+		if (!g_sh.ex_list[count].redirect)
 			i++;
-		//print_arr_g_sh_cmd_and_args();
+		count++;
+	}
+
+	i = 0;
+	while (i < count)
+	{
+		j = 0;
+		while (g_sh.ex_list[i].cmd_and_args[j])
+		{
+			printf("cmd_and_args[%d][%d]= %s\n", i, j, g_sh.ex_list[i].cmd_and_args[j]);
+			j++;
+		}
+		printf("redirect[%d]= %s\n", i, g_sh.ex_list[i].redirect);
+		i++;
 	}
 }

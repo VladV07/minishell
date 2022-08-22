@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/21 20:30:07 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:52:43 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ typedef struct s_list{
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_list_executor{
+	char					**cmd_and_args;
+	char					*redirect;
+}	t_execut;
+
 typedef struct s_data{
 	char		*commands[8];
 	char		*str;
 	char		***res_pars;
-	char		**cmd_and_args;
-	char		*redirect;
 	char		**env;
+	t_execut	*ex_list;
 	t_list		env_list;
 	int			stop_flag;
 	int			plase_redirect;
