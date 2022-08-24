@@ -6,11 +6,24 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/22 20:10:07 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/24 21:20:42 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_arr_g_sh_cmd_and_args(void)
+{
+	int	i;
+
+	i = 0;
+	while (g_sh.cmd_and_args[i] != NULL)
+	{
+		printf("g_sh.cmd_and_args[%d]=%s\n", i, g_sh.cmd_and_args[i]);
+		i++;
+	}
+}
+
 /*
 void	do_command(char **cmd_and_args, int nb_command)
 {
@@ -90,6 +103,31 @@ char	**split_redirections(char **res_pars, int count)
 	return (res_pars);
 }
 
+void	do_reredirections(char **res_pars)
+{
+	int	i;
+
+	i = 0;
+	free(g_sh.cmd_and_args);
+	close(g_sh.fd_stdin);
+	close(g_sh.fd_stdout);
+	while (res_pars[i])
+	{
+		if (strcmp(res_pars[i], ">") == 0)
+			g_sh.fd_stdin = open(res_pars[++i], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+		else if (strcmp(res_pars[i], ">>") == 0)
+			g_sh.fd_stdin = open(res_pars[++i], O_WRONLY | O_CREAT | O_APPEND, 0664);
+		else if (strcmp(res_pars[i], "<") == 0)
+			g_sh.fd_stdout = open(res_pars[++i], O_RDONLY, 0664);
+		else if (strcmp(res_pars[i], "<<") == 0)
+			g_sh.fd_stdout = open(res_pars[++i], O_RDONLY, 0664);
+		i++;
+		g_sh.cmd_and_args[i] = res_pars[i];
+	}
+	dup2(g_sh.fd_stdin, 1);
+	dup2(g_sh.fd_stdout, 0);
+}
+
 void	executor(char ***res_pars, char **env)
 {
 	int		i;
@@ -101,12 +139,13 @@ void	executor(char ***res_pars, char **env)
 	get_command = 0;
 	i = 0;
 	count = 0;
-	g_sh.ex_list = malloc(sizeof(t_execut) * 10); // посчитать выделение памяти
+	//g_sh.ex_list = malloc(sizeof(t_execut) * 10); // посчитать выделение памяти
+
+	
 	while (res_pars[i])
 	{
-		res_pars[i] = split_redirections(res_pars[i], count);
-	/*
-		printf("g_sh.redirect= %s\n", g_sh.redirect);
+		//res_pars[i] = split_redirections(res_pars[i], count);
+		do_reredirections(res_pars[i]);
 		j = 0;
 		get_command = 0;
 		while (g_sh.commands[j])
@@ -123,13 +162,16 @@ void	executor(char ***res_pars, char **env)
 		}
 		if (get_command == 0)
 			printf("minishell: %s: command not found\n", g_sh.cmd_and_args[0]);
-	*/
+	/*
 		res_pars[i] = res_pars[i] + g_sh.plase_redirect;
 		if (!g_sh.ex_list[count].redirect)
 			i++;
 		count++;
+	*/
+		i++;
 	}
 
+/*
 	i = 0;
 	while (i < count)
 	{
@@ -142,4 +184,6 @@ void	executor(char ***res_pars, char **env)
 		printf("redirect[%d]= %s\n", i, g_sh.ex_list[i].redirect);
 		i++;
 	}
+*/
+
 }
