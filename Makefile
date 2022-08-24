@@ -32,7 +32,7 @@ LIST =  minishell.c \
 		$(PARSER)is_key.c \
 		$(PARSER)ln_env.c \
 		$(PARSER)parser.c \
-		executor.c
+		#executor.c
 
 
 LIBFT = ./libft/libft.a 
@@ -41,7 +41,7 @@ READLINE = -lreadline
 
 OBJS = $(patsubst %.c,%.o,$(LIST))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 .PHONY : all clean fclean re
 

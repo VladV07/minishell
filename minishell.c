@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/22 19:52:17 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:00:35 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	//(void)env;
+	(void)env;
 	//g_sh.str = strdup("co$USER mman\\nn\'dd000\\\'00co\"mm\\\"\"an\"\'dddd\'a");
 	//g_sh.str = strdup("\"8\"8\"8\"");
 	//g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9");
@@ -48,13 +48,12 @@ int	main(int argc, char **argv, char **env)
 	while (!g_sh.stop_flag)
 	{
 		g_sh.str = readline("minishell $");
-		//ch_err = lexer(g_sh.str);
-		ch_err = 0;
+		ch_err = lexer(g_sh.str);
 		if (!ch_err)
 		{
 			printf("g_sh.str= %s\n", g_sh.str);
-			parser(g_sh.str, env);
-			executor(g_sh.res_pars, env);
+			//parser(g_sh.str, env);
+			//executor(g_sh.res_pars, env);
 			//g_sh.stop_flag = 1;
 		}
 		else
