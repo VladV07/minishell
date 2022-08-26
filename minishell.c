@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/24 17:00:35 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/08/26 22:00:18 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ int	main(int argc, char **argv, char **env)
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
+		free(g_sh.str);
 		g_sh.str = readline("minishell $");
 		ch_err = lexer(g_sh.str);
 		if (!ch_err)
 		{
 			printf("g_sh.str= %s\n", g_sh.str);
-			//parser(g_sh.str, env);
-			//executor(g_sh.res_pars, env);
+			parser(g_sh.str, env);
+			executor(g_sh.res_pars, env);
 			//g_sh.stop_flag = 1;
 		}
 		else
