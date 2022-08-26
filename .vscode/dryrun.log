@@ -1,23 +1,22 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/kenny/Desktop/minishell'
 make -C ./libft
-cc -Wall -Wextra -Werror -c minishell.c -o minishell.o -I minishell.h
-cc -Wall -Wextra -Werror -c ft_lstclear.c -o ft_lstclear.o -I minishell.h
-cc -Wall -Wextra -Werror -c ft_lstlast.c -o ft_lstlast.o -I minishell.h
-cc -Wall -Wextra -Werror -c ft_lstnew.c -o ft_lstnew.o -I minishell.h
-cc -Wall -Wextra -Werror -c ft_pushback.c -o ft_pushback.o -I minishell.h
-cc -Wall -Wextra -Werror -c ft_readline.c -o ft_readline.o -I minishell.h
-cc -Wall -Wextra -Werror -c ft_strjoin_free.c -o ft_strjoin_free.o -I minishell.h
-cc -Wall -Wextra -Werror -c lexer.c -o lexer.o -I minishell.h
-cc -Wall -Wextra -Werror -c parser/get_dollar.c -o parser/get_dollar.o -I minishell.h
- 
-cc -Wall -Wextra -Werror -c parser/get_double_quotes.c -o parser/get_double_quotes.o -I minishell.h
-cc -Wall -Wextra -Werror -c parser/get_in_env.c -o parser/get_in_env.o -I minishell.h
-cc -Wall -Wextra -Werror -c parser/get_quote.c -o parser/get_quote.o -I minishell.h
-cc -Wall -Wextra -Werror -c parser/get_slesh.c -o parser/get_slesh.o -I minishell.h
-cc -Wall -Wextra -Werror -c parser/is_key.c -o parser/is_key.o -I minishell.h
-cc -Wall -Wextra -Werror -c parser/ln_env.c -o parser/ln_env.o -I minishell.h
-cc -Wall -Wextra -Werror -c parser/parser.c -o parser/parser.o -I minishell.h
-cc -Wall -Wextra -Werror minishell.o ft_lstclear.o ft_lstlast.o ft_lstnew.o ft_pushback.o ft_readline.o ft_strjoin_free.o lexer.o parser/get_dollar.o parser/get_double_quotes.o parser/get_in_env.o parser/get_quote.o parser/get_slesh.o parser/is_key.o parser/ln_env.o parser/parser.o ./libft/libft.a  -lreadline -I minishell.h -o minishell
+cc -Wall -Wextra -Werror -g -c minishell.c -o minishell.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c ft_lstclear.c -o ft_lstclear.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c ft_lstlast.c -o ft_lstlast.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c ft_lstnew.c -o ft_lstnew.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c ft_pushback.c -o ft_pushback.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c ft_readline.c -o ft_readline.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c ft_strjoin_free.c -o ft_strjoin_free.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c lexer.c -o lexer.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c parser/get_dollar.c -o parser/get_dollar.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c parser/get_double_quotes.c -o parser/get_double_quotes.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c parser/get_in_env.c -o parser/get_in_env.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c parser/get_quote.c -o parser/get_quote.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c parser/get_slesh.c -o parser/get_slesh.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c parser/is_key.c -o parser/is_key.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c parser/ln_env.c -o parser/ln_env.o -I minishell.h
+cc -Wall -Wextra -Werror -g -c parser/parser.c -o parser/parser.o -I minishell.h
+cc -Wall -Wextra -Werror -g minishell.o ft_lstclear.o ft_lstlast.o ft_lstnew.o ft_pushback.o ft_readline.o ft_strjoin_free.o lexer.o parser/get_dollar.o parser/get_double_quotes.o parser/get_in_env.o parser/get_quote.o parser/get_slesh.o parser/is_key.o parser/ln_env.o parser/parser.o ./libft/libft.a  -lreadline -I minishell.h -o minishell
 make: Leaving directory `/Users/kenny/Desktop/minishell'
  
