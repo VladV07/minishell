@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/26 22:00:18 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/30 18:57:34 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ int	main(int argc, char **argv, char **env)
 	//g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \'\"8\'\"6\"8\'8\'8\"9\"      dfgghfg      ");
 	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
 	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
-	g_sh.str = ft_strdup ("text");
+	//g_sh.str = ft_strdup ("text");
 	init_shell();
 	while (!g_sh.stop_flag)
 	{
-		free(g_sh.str);
 		g_sh.str = readline("minishell $");
 		ch_err = lexer(g_sh.str);
 		if (!ch_err)
@@ -59,7 +58,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 			printf("command error\n");
+		free(g_sh.str);
 	}
-	free(g_sh.str);
 	return (0);
 }

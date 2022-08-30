@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/29 21:55:00 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/30 22:08:46 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,65 +44,6 @@ void	do_command(char **cmd_and_args, int nb_command)
 }
 */
 
-int	do_split_redirections(char **res_pars, int i, int count, char *redir)
-{
-	int	j;
-
-	if (strcmp(res_pars[i], redir) == 0) // заменить на ft_strcmp
-	{
-		j = -1;
-		while (++j < i)
-			g_sh.ex_list[count].cmd_and_args[j] = res_pars[j];
-		g_sh.ex_list[count].cmd_and_args[j] = NULL;
-		g_sh.ex_list[count].redirect = ft_strdup(redir);
-		j = 0;
-		g_sh.plase_redirect = i + 1;
-		return (0);
-	}
-	return (1);
-}
-
-void	do_split_redirections_end(char **res_pars, int i, int count)
-{
-	int	j;
-
-	if (res_pars[i + 1] == NULL)
-	{
-		j = -1;
-		while (++j <= i)
-			g_sh.ex_list[count].cmd_and_args[j] = res_pars[j];
-		g_sh.ex_list[count].cmd_and_args[j] = NULL;
-	}
-	g_sh.plase_redirect = 0;
-	g_sh.ex_list[count].redirect = NULL;
-}
-
-char	**split_redirections(char **res_pars, int count)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	g_sh.ex_list[count].cmd_and_args = malloc(1000); // посчитать выделение памяти
-	g_sh.ex_list[count].redirect = malloc(10); // посчитать выделение памяти
-	while (res_pars[i])
-	{
-		printf("res_pars[%d]= %s\n", i, res_pars[i]);
-		if (do_split_redirections(res_pars, i, count, "<") == 0)
-			break ;
-		if (do_split_redirections(res_pars, i, count, "<<") == 0)
-			break ;
-		if (do_split_redirections(res_pars, i, count, ">") == 0)
-			break ;
-		if (do_split_redirections(res_pars, i, count, ">>") == 0)
-			break ;
-		do_split_redirections_end(res_pars, i, count);
-		i++;
-	}
-	return (res_pars);
-}
-
 void	do_redirections(char **res_pars)
 {
 	int	i;
@@ -111,7 +52,7 @@ void	do_redirections(char **res_pars)
 
 	i = 0;
 	printf("do_redirections: 1\n");
-	free(g_sh.cmd_and_args);
+	//free(g_sh.cmd_and_args);
 	printf("do_redirections: 2\n");
 	//g_sh.fd_stdin = dup(0);
 	//g_sh.fd_stdout = dup(1);
@@ -128,9 +69,9 @@ void	do_redirections(char **res_pars)
 		i++;
 		count = count + j + 1;
 	}
-	printf("do_redirections: 4\n");
+	//printf("do_redirections: 4\n");
 	g_sh.cmd_and_args = malloc(count);
-	printf("do_redirections: 5\n");
+	//printf("do_redirections: 5\n");
 	//if (!g_sh.cmd_and_args)
 	//	exit_err;
 	i = 0;
@@ -154,13 +95,9 @@ void	do_redirections(char **res_pars)
 		}
 		i++;
 	}
-	printf("do_redirections: 6\n");
+	//printf("do_redirections: 6\n");
 	g_sh.cmd_and_args[j] = NULL;
 	printf("do_redirections: 7\n");
-	//dup2(g_sh.fd_stdin, 0);
-	printf("do_redirections: 8\n");
-	//dup2(g_sh.fd_stdout, 1);
-	printf("do_redirections: 9\n");
 }
 
 void	executor(char ***res_pars, char **env)
@@ -169,12 +106,19 @@ void	executor(char ***res_pars, char **env)
 	int		j;
 	int		get_command;
 	int		ret;
-	int		fdpipe[2];
 	int		count;
+	int		tmpin;
+	int		tmpout;
+	int		fdin;
+	int		fdout;
+	int		fdpipe[2];
 
 	(void)env;
-	g_sh.fd_stdin = dup(0);
-	g_sh.fd_stdout = dup(1);
+	tmpin = dup(0);
+	tmpout = dup(1);
+	fdin = dup(tmpin);
+	//g_sh.fd_stdin = dup(tmpin);
+	//g_sh.fd_stdout = dup(tmpout);
 	get_command = 0;
 
 	i = -1;
@@ -187,37 +131,42 @@ void	executor(char ***res_pars, char **env)
 	{
 		printf("res_pars[%d]= %s\n", i, res_pars[i][0]);
 		printf("executor: 1\n");
-		//do_redirections(res_pars[i]);
-		printf("executor: 2\n");
-		
-		if (i != (count - 1))
-		{
-			printf("executor: 3\n");
-			pipe(fdpipe);
-			g_sh.fd_stdin = fdpipe[0];
-			g_sh.fd_stdout = fdpipe[1];
-			printf("executor: 4\n");
-		}
-		dup2(g_sh.fd_stdin, 0);
-		close(g_sh.fd_stdin);
 		do_redirections(res_pars[i]);
-		//dup2(g_sh.fd_stdin, 0);
-		dup2(g_sh.fd_stdout, 1);
-		printf("executor: 5\n");
-		//close(g_sh.fd_stdin);
-		close(g_sh.fd_stdout);
-		printf("executor: 6\n");
+		printf("executor[cmd = %s]: 2\n",g_sh.cmd_and_args[0]);
+		dup2(fdin, 0);
+		close(fdin);
+		if (i == (count - 1))
+		{
+			fdout = dup(tmpout);
+		}
+		else
+		{
+			printf("executor[cmd = %s]: 3\n",g_sh.cmd_and_args[0]);
+			pipe(fdpipe);
+			fdout = fdpipe[1];
+			fdin = fdpipe[0];
+			printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 4\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
+		}
+
+		dup2(fdout, 1);
+		close(fdout);
+		printf("executor[cmd = %s]: 5\n",g_sh.cmd_and_args[0]);
 		
 		ret = fork();
-		printf("executor: 3\n");
+		printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 6\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
 		if (ret == 0)
 		{
+			close(tmpin);
+			close(tmpout);
+			close(fdin);
 			//do_redirections(res_pars[i]);
-			printf("executor: 4\n");
+			printf("executor: 7\n");
 			j = 0;
 			get_command = 0;
+			printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 8\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
 			while (g_sh.commands[j])
 			{
+				printf("executor: while (g_sh.commands[j]) 9\n");
 				//printf("g_sh.cmd_and_args[0]= %s\n", g_sh.cmd_and_args[0]);
 				//printf("g_sh.commands[%d]= %s\n", j, g_sh.commands[j]);
 				if (strcmp(g_sh.cmd_and_args[0], g_sh.commands[j]) == 0) // потом поменять на ft_strcmp
@@ -232,28 +181,25 @@ void	executor(char ***res_pars, char **env)
 			{
 				//execvp("ls", NULL);
 				//perror("execvp");
-				printf("executor: 5\n");
+				printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 10execvp\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
 				//printf("minishell: %s: command not found\n", g_sh.cmd_and_args[0]);
 			}
-			printf("executor: exit\n");
-			close(g_sh.fd_stdin);
-			close(g_sh.fd_stdout);
-			close(fdpipe[0]);
-			close(fdpipe[1]);
-			exit(1); // свой exit
+			printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 11exit\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
+			exit(0); // свой exit
 		}
-		i++;
-		printf("executor: 6\n");
+		printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 12\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
 		//print_arr_g_sh_cmd_and_args();
-		printf("executor: 7\n");
-		dup2(g_sh.fd_stdin, 0);
-		dup2(g_sh.fd_stdout, 1);
-		close(g_sh.fd_stdin);
-		close(g_sh.fd_stdout);
-		close(fdpipe[0]);
-		close(fdpipe[1]);
+		dup2(tmpin, 0);
+		dup2(tmpout, 1);
+		//close(tmpin);
+		//close(tmpout);
+		//g_sh.fd_stdin = dup(fdpipe[1]);
+		//close(fdpipe[0]);
+		//dup2(tmpin, 0);
+		printf("executor[cmd = %s]:  waitpid\n", g_sh.cmd_and_args[0]);
 		waitpid(ret, NULL, 0);
-		printf("executor: 8\n");
+		printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 13\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
+		i++;
 	}
-	printf("executor: 9\n");
+	printf("executor: 14end\n");
 }

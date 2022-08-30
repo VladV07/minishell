@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:37:47 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/26 21:55:34 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:53:56 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	print_arr_g_sh_res_pars(void)
 		}
 		i++;
 	}
-	printf("g_sh.res_pars[%d]=%s\n", i, g_sh.res_pars[i - 1][0]);
 }
 
 void	kostyl_return(void)
@@ -97,7 +96,7 @@ void	parser(char *str, char **env)
 		i++;
 	}
 	g_sh.res_pars[i] = NULL;
-	print_arr_g_sh_res_pars();
+	//print_arr_g_sh_res_pars();
 	kostyl_return();
 	print_arr_g_sh_res_pars();
 	free(str_pars_tmp);
