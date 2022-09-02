@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/30 22:08:46 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/02 20:45:37 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ void	do_command(char **cmd_and_args, int nb_command)
 }
 */
 
-void	do_redirections(char **res_pars)
+int	do_redirections(char **res_pars)
 {
 	int	i;
 	int	j;
 	int	count;
+	int	rd_in;
+	int	rd_out;
 
 	i = 0;
 	printf("do_redirections: 1\n");
@@ -76,17 +78,31 @@ void	do_redirections(char **res_pars)
 	//	exit_err;
 	i = 0;
 	j = 0;
+	rd_in = 0;
+	rd_out = 0;
 	while (res_pars[i])
 	{
 		printf("do_redirections: res_pars[%d]= %s\n", i, res_pars[i]);
-		if (strcmp(res_pars[i], ">") == 0)
-			g_sh.fd_stdin = open(res_pars[++i], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-		else if (strcmp(res_pars[i], ">>") == 0)
-			g_sh.fd_stdin = open(res_pars[++i], O_WRONLY | O_CREAT | O_APPEND, 0664);
-		else if (strcmp(res_pars[i], "<") == 0)
-			g_sh.fd_stdout = open(res_pars[++i], O_RDONLY, 0664);
-		else if (strcmp(res_pars[i], "<<") == 0)
-			g_sh.fd_stdout = open(res_pars[++i], O_RDONLY, 0664);
+		if (strcmp(res_pars[i], ">") == 0) //
+		{
+			g_sh.fd_stdout = open(res_pars[++i], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+			rd_out = 1;
+		}
+		else if (strcmp(res_pars[i], ">>") == 0) //
+		{
+			g_sh.fd_stdout = open(res_pars[++i], O_WRONLY | O_CREAT | O_APPEND, 0664);
+			rd_out = 1;
+		}
+		else if (strcmp(res_pars[i], "<") == 0) //
+		{
+			g_sh.fd_stdin = open(res_pars[++i], O_RDONLY, 0664);
+			rd_in = 1;
+		}
+		else if (strcmp(res_pars[i], "<<") == 0) //
+		{
+			g_sh.fd_stdin = open(res_pars[++i], O_RDONLY, 0664);
+			rd_in = 1;
+		}
 		else
 		{
 			g_sh.cmd_and_args[j] = res_pars[i];
@@ -98,6 +114,13 @@ void	do_redirections(char **res_pars)
 	//printf("do_redirections: 6\n");
 	g_sh.cmd_and_args[j] = NULL;
 	printf("do_redirections: 7\n");
+	if (rd_in == 1 && rd_out == 1)
+		return (3);
+	if (rd_in == 1 && rd_out == 0)
+		return (2);
+	if (rd_in == 0 && rd_out == 1)
+		return (1);
+	return (0);
 }
 
 void	executor(char ***res_pars, char **env)
@@ -109,15 +132,16 @@ void	executor(char ***res_pars, char **env)
 	int		count;
 	int		tmpin;
 	int		tmpout;
-	int		fdin;
-	int		fdout;
+	//int		fdin;
+	//int		fdout;
 	int		fdpipe[2];
+	int		rd;
 
 	(void)env;
 	tmpin = dup(0);
 	tmpout = dup(1);
-	fdin = dup(tmpin);
-	//g_sh.fd_stdin = dup(tmpin);
+	//fdin = dup(tmpin);
+	g_sh.fd_stdin = dup(tmpin);
 	//g_sh.fd_stdout = dup(tmpout);
 	get_command = 0;
 
@@ -131,25 +155,27 @@ void	executor(char ***res_pars, char **env)
 	{
 		printf("res_pars[%d]= %s\n", i, res_pars[i][0]);
 		printf("executor: 1\n");
-		do_redirections(res_pars[i]);
+		rd = do_redirections(res_pars[i]);
 		printf("executor[cmd = %s]: 2\n",g_sh.cmd_and_args[0]);
-		dup2(fdin, 0);
-		close(fdin);
+		dup2(g_sh.fd_stdin, 0);
+		close(g_sh.fd_stdin);
+
 		if (i == (count - 1))
 		{
-			fdout = dup(tmpout);
+			if (rd != 3 && rd != 1)
+				g_sh.fd_stdout = dup(tmpout);
 		}
 		else
 		{
 			printf("executor[cmd = %s]: 3\n",g_sh.cmd_and_args[0]);
 			pipe(fdpipe);
-			fdout = fdpipe[1];
-			fdin = fdpipe[0];
+			g_sh.fd_stdout = fdpipe[1];
+			g_sh.fd_stdin = fdpipe[0];
 			printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 4\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
 		}
 
-		dup2(fdout, 1);
-		close(fdout);
+		dup2(g_sh.fd_stdout, 1);
+		close(g_sh.fd_stdout);
 		printf("executor[cmd = %s]: 5\n",g_sh.cmd_and_args[0]);
 		
 		ret = fork();
@@ -158,7 +184,7 @@ void	executor(char ***res_pars, char **env)
 		{
 			close(tmpin);
 			close(tmpout);
-			close(fdin);
+			close(g_sh.fd_stdin);
 			//do_redirections(res_pars[i]);
 			printf("executor: 7\n");
 			j = 0;
@@ -179,7 +205,7 @@ void	executor(char ***res_pars, char **env)
 			}
 			if (get_command == 0)
 			{
-				//execvp("ls", NULL);
+				execvp(g_sh.cmd_and_args[0], g_sh.cmd_and_args);
 				//perror("execvp");
 				printf("executor[cmd = %s]: fdpipe[0]=%d fdpipe[1]=%d 10execvp\n",g_sh.cmd_and_args[0], fdpipe[0], fdpipe[1]);
 				//printf("minishell: %s: command not found\n", g_sh.cmd_and_args[0]);
