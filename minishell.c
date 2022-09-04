@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/30 18:57:34 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/04 21:47:07 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	(void)env;
 	//g_sh.str = strdup("co$USER mman\\nn\'dd000\\\'00co\"mm\\\"\"an\"\'dddd\'a");
 	//g_sh.str = strdup("\"8\"8\"8\"");
 	//g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9");
@@ -58,7 +57,9 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 			printf("command error\n");
-		free(g_sh.str);
+		free_g_sh();
+		system("leaks executablename");
 	}
+	free_and_exit(0);
 	return (0);
 }

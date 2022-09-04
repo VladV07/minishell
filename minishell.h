@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/24 19:58:50 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/04 21:10:39 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <readline/readline.h>
+# include <sys/errno.h>
 # include "libft/libft.h"
 # include <string.h>  // потом убрать
 
@@ -59,5 +60,7 @@ char	*get_double_quotes(char *str, int *i, char **env);
 void	parser(char *str, char **env);
 int		lexer(char *str);
 void	executor(char ***res_pars, char **env);
+void	free_and_exit(int err_nb);
+void	free_g_sh(void);
 
 #endif
