@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/04 20:53:24 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/05 20:11:17 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,23 @@ int	do_redirections(char **res_pars)
 {
 	int	i;
 	int	j;
-	int	count;
 	int	rd_in;
 	int	rd_out;
 
 	i = 0;
-	count = 0;
 	while (res_pars[i])
-	{
-		j = 0;
-		while (res_pars[i][j])
-		{
-			j++;
-		}
 		i++;
-		count = count + j + 1;
-	}
-	g_sh.cmd_and_args = (char **)malloc(sizeof(char **) * count);
+	g_sh.cmd_and_args = (char **)malloc(sizeof(char *) * (i + 1));
+	// i = 0;
+	// while (res_pars[i])
+	// {
+	// 	j = 0;
+	// 	while (res_pars[i][j])
+	// 		j++;
+	// 	g_sh.cmd_and_args[i] = (char *)malloc(sizeof(char) * j);
+	// 	i++;
+	// }
+	
 	//if (!g_sh.cmd_and_args)
 	//	exit_err;
 	i = 0;
@@ -121,6 +121,8 @@ void	executor(char ***res_pars, char **env)
 	int		tmpout;
 	int		fdpipe[2];
 	int		rd;
+
+	print_arr_g_sh_res_pars();
 
 	(void)env;
 	tmpin = dup(0);
@@ -183,12 +185,19 @@ void	executor(char ***res_pars, char **env)
 					else
 						perror("execvp");
 				}
-				free_and_exit(0);
+				free(g_sh.cmd_and_args);
+				free_and_exit(1);
 			}
 		}
 		dup2(tmpin, 0);
 		dup2(tmpout, 1);
 		waitpid(ret, NULL, 0);
+		// int ii;
+		// ii = 0;
+		// while (g_sh.cmd_and_args[ii])
+		// 	free(g_sh.cmd_and_args[ii++]);
+		
+		free(g_sh.cmd_and_args);
 		i++;
 	}
 	close(tmpin);

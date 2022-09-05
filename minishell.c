@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/04 21:47:07 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/05 21:05:15 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_shell(void)
 	g_sh.stop_flag = 0;
 	g_sh.plase_redirect = 0;
 	g_sh.res_pars = NULL;
+	g_sh.commands = (char **)malloc(sizeof(char *) * 9);
 	g_sh.commands[0] = ft_strdup("echo");
 	g_sh.commands[1] = ft_strdup("cd");
 	g_sh.commands[2] = ft_strdup("pwd");
@@ -57,8 +58,9 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 			printf("command error\n");
+		printf("g_sh.str = %s\n", g_sh.str); //
 		free_g_sh();
-		system("leaks executablename");
+		//system("leaks executablename");
 	}
 	free_and_exit(0);
 	return (0);

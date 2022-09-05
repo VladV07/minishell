@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:37:47 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/30 19:53:56 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/05 19:59:30 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	parser(char *str, char **env)
 {
 	char	**str_pars_tmp;
 	int		i;
-	int		size_str_pars_tmp;
+	//int		size_str_pars_tmp;
 
 	printf("parser: str = %s\n", str);
 	i = 0;
@@ -79,16 +79,21 @@ void	parser(char *str, char **env)
 	printf("parser: str = %s\n", str);
 	str_pars_tmp = ft_split(str, '|');
 	printf("parser: str_pars_tmp[0] = %s\n", str_pars_tmp[0]);
-	i = -1;
-	size_str_pars_tmp = 0;
-	while (str_pars_tmp[++i])
-		size_str_pars_tmp = size_str_pars_tmp + ft_strlen(str_pars_tmp[i]);
-	printf("parser: size_str_pars_tmp = %d\n", size_str_pars_tmp);
+	//i = -1;
+	//size_str_pars_tmp = 0;
+	//while (str_pars_tmp[++i])
+	//	size_str_pars_tmp = size_str_pars_tmp + ft_strlen(str_pars_tmp[i]);
+	//printf("parser: size_str_pars_tmp = %d\n", size_str_pars_tmp);
+
 	i = 0;
-	g_sh.res_pars = (char ***)malloc(sizeof(char ***) * \
-								(size_str_pars_tmp + 1));
+	while (str_pars_tmp[i])
+		i++;
+	g_sh.res_pars = (char ***)malloc(sizeof(char **) * \
+								(i + 1));
+								
 	//if (!g_sh.res_pars)
 	//	exit_err();
+	i = 0;
 	while (str_pars_tmp[i])
 	{
 		printf("parser: str_pars_tmp[%d] = %s\n", i, str_pars_tmp[i]);
@@ -96,8 +101,13 @@ void	parser(char *str, char **env)
 		i++;
 	}
 	g_sh.res_pars[i] = NULL;
-	//print_arr_g_sh_res_pars();
 	kostyl_return();
-	print_arr_g_sh_res_pars();
+	i = 0;
+	while (str_pars_tmp[i])
+		free(str_pars_tmp[i++]);
 	free(str_pars_tmp);
+	printf("g_sh.str = %s\n", g_sh.str); //
+	printf("str = %s\n", str); //
+	free(str);
+	print_arr_g_sh_res_pars();
 }
