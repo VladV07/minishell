@@ -33,7 +33,9 @@ LIST =  minishell.c \
 		$(PARSER)ln_env.c \
 		$(PARSER)parser.c \
 		executor.c \
-		free_and_exit.c
+		free_and_exit.c \
+		ft_strcmp.c \
+		command/ft_echo.c
 
 
 LIBFT = ./libft/libft.a 

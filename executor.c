@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/05 20:11:17 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:10:25 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ void	print_arr_g_sh_cmd_and_args(void)
 void	do_command(char **cmd_and_args, int nb_command)
 {
 	(void)cmd_and_args;
-	/*if (nb_command == 0)
-		echo(cmd_and_args);
-	if (nb_command == 1)
-		cd(cmd_and_args);
-	if (nb_command == 2)
-		pwd(cmd_and_args);
-	if (nb_command == 3)
-		export(cmd_and_args);
-	if (nb_command == 4)
-		unset(cmd_and_args);
-	if (nb_command == 5)
-		env(cmd_and_args);*/
-	if (nb_command == 6)
-		g_sh.stop_flag = 1;
+	if (nb_command == 0)
+		ft_echo(cmd_and_args);
+	// if (nb_command == 1)
+	// 	cd(cmd_and_args);
+	// if (nb_command == 2)
+	// 	pwd(cmd_and_args);
+	// if (nb_command == 3)
+	// 	export(cmd_and_args);
+	// if (nb_command == 4)
+	// 	unset(cmd_and_args);
+	// if (nb_command == 5)
+	// 	env(cmd_and_args);*/
+	// if (nb_command == 6)
+	 	g_sh.stop_flag = 1;
 }
 
 int	do_redirections(char **res_pars)

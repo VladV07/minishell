@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/05 20:36:42 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:09:35 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ void	executor(char ***res_pars, char **env);
 void	free_and_exit(int err_nb);
 void	free_g_sh(void);
 void	print_arr_g_sh_res_pars(void); // для проверки убрать
+int		ft_strcmp(char *str1, char *str2);
+int		ft_echo (char **str);
 
 #endif
