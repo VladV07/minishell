@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/09 15:37:18 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/09 16:00:49 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_arr_g_sh_cmd_and_args(void)
 }
 
 
-void	do_command(char **cmd_and_args, int nb_command)
+void	do_command(char **cmd_and_args, int nb_command, char **env)
 {
 	(void)cmd_and_args;
 	if (nb_command == 0)
@@ -38,8 +38,8 @@ void	do_command(char **cmd_and_args, int nb_command)
 	// 	export(cmd_and_args);
 	// if (nb_command == 4)
 	// 	unset(cmd_and_args);
-	// if (nb_command == 5)
-	// 	env(cmd_and_args);*/
+	 if (nb_command == 5)
+	 	ft_env(env);
 	// if (nb_command == 6)
 	// 	g_sh.stop_flag = 1;
 }
@@ -164,7 +164,7 @@ void	executor(char ***res_pars, char **env)
 			if (strcmp(g_sh.cmd_and_args[0], g_sh.commands[j]) == 0) // потом поменять на ft_strcmp
 			{
 				printf("command= %s, j = %d\n", g_sh.commands[j], j);
-				do_command(res_pars[i], j);
+				do_command(res_pars[i], j, env);
 				get_command = 1;
 			}
 			j++;

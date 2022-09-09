@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/09 15:35:29 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/09 16:01:37 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void	print_arr_g_sh_res_pars(void); // для проверки убрать
 int		ft_strcmp(char *str1, char *str2);
 int		ft_echo (char **str);
 int		ft_pwd(void);
+int		ft_env(char **env);
 
 #endif
