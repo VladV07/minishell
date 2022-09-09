@@ -35,7 +35,8 @@ LIST =  minishell.c \
 		executor.c \
 		free_and_exit.c \
 		ft_strcmp.c \
-		command/ft_echo.c
+		command/ft_echo.c \
+		command/ft_pwd.c
 
 
 LIBFT = ./libft/libft.a 

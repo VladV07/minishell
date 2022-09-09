@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/08 20:10:25 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/09 15:37:18 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	do_command(char **cmd_and_args, int nb_command)
 		ft_echo(cmd_and_args);
 	// if (nb_command == 1)
 	// 	cd(cmd_and_args);
-	// if (nb_command == 2)
-	// 	pwd(cmd_and_args);
+	 if (nb_command == 2)
+	 	ft_pwd();
 	// if (nb_command == 3)
 	// 	export(cmd_and_args);
 	// if (nb_command == 4)
@@ -41,7 +41,7 @@ void	do_command(char **cmd_and_args, int nb_command)
 	// if (nb_command == 5)
 	// 	env(cmd_and_args);*/
 	// if (nb_command == 6)
-	 	g_sh.stop_flag = 1;
+	// 	g_sh.stop_flag = 1;
 }
 
 int	do_redirections(char **res_pars)
