@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/09 16:00:49 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/11 22:20:09 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ void	do_command(char **cmd_and_args, int nb_command, char **env)
 		ft_echo(cmd_and_args);
 	// if (nb_command == 1)
 	// 	cd(cmd_and_args);
-	 if (nb_command == 2)
-	 	ft_pwd();
+	if (nb_command == 2)
+		ft_pwd();
 	// if (nb_command == 3)
 	// 	export(cmd_and_args);
 	// if (nb_command == 4)
 	// 	unset(cmd_and_args);
-	 if (nb_command == 5)
-	 	ft_env(env);
-	// if (nb_command == 6)
-	// 	g_sh.stop_flag = 1;
+	if (nb_command == 5)
+		ft_env(env);
+	if (nb_command == 6)
+		g_sh.stop_flag = 1;
 }
 
 int	do_redirections(char **res_pars)
@@ -188,10 +188,10 @@ void	executor(char ***res_pars, char **env)
 				free(g_sh.cmd_and_args);
 				free_and_exit(1);
 			}
+			dup2(tmpin, 0);
+			dup2(tmpout, 1);
+			waitpid(ret, NULL, 0);
 		}
-		dup2(tmpin, 0);
-		dup2(tmpout, 1);
-		waitpid(ret, NULL, 0);
 		// int ii;
 		// ii = 0;
 		// while (g_sh.cmd_and_args[ii])
