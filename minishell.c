@@ -3,16 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/05 21:05:15 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:57:15 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_shell(void)
+int		ft_len_env(char **env)
+{
+	int	i;
+	int	len;
+
+	i = -1;
+	len = 0;
+	while(env[++i])
+		len++;
+	return(len);
+}
+
+char	**ft_cpy_env(char **nenv, char **env)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (env[++i])
+	{
+		j = -1;
+		while (env[i][++j])
+		{
+			nenv[i] = (char *)malloc(sizeof(char *) * strlen(env[i]));
+			nenv[i] = memcpy(nenv[i], env[i], strlen(env[i]));
+		}
+	}
+	return(nenv);
+}
+
+void	ft_get_in_env(char **env)
+{
+	int len;
+
+	len = ft_len_env(env);
+	g_sh.env = (char **)malloc(sizeof(char **) * len + 1);
+	g_sh.env[len] = NULL;
+	g_sh.env = ft_cpy_env(g_sh.env, env);
+}
+
+void	init_shell(char **env)
 {
 	g_sh.stop_flag = 0;
 	g_sh.plase_redirect = 0;
@@ -26,6 +66,7 @@ void	init_shell(void)
 	g_sh.commands[5] = ft_strdup("env");
 	g_sh.commands[6] = ft_strdup("exit");
 	g_sh.commands[7] = NULL;
+	ft_get_in_env(env);
 }
 
 /* тут последовательно перебираем '' \ "" $ ; | > >> < ' '  */
@@ -44,7 +85,7 @@ int	main(int argc, char **argv, char **env)
 	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
 	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
 	//g_sh.str = ft_strdup ("text");
-	init_shell();
+	init_shell(env);
 	while (!g_sh.stop_flag)
 	{
 		g_sh.str = readline("minishell $");
