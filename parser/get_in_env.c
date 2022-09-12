@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_in_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:24:11 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/19 21:30:01 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:33:23 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_in_env(char *str, int *i, char **env)
 	key = ft_substr(str, nb_dollar + 1, *i - nb_dollar - 1);
 	printf("get_in_env: key = %s\n", key);
 	j = -1;
-	while (env[++j] && j <= 30) //нужно будет добавить поиск по своему env и свой критерий остановки
+	while (env[++j]) //нужно будет добавить поиск по своему env и свой критерий остановки
 	{
 		printf("get_in_env: j = %d\n", j);
 		if (strstr(env[j], key)) //нет в библиотеке ft_ 

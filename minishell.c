@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 14:57:15 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:27:39 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,6 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	//g_sh.str = strdup("co$USER mman\\nn\'dd000\\\'00co\"mm\\\"\"an\"\'dddd\'a");
-	//g_sh.str = strdup("\"8\"8\"8\"");
-	//g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \"8\"8\"8 \" 9");
-	//g_sh.str = strdup(" 1 2 3| 				4    55555 6|7 \'\"8\'\"6\"8\'8\'8\"9\"      dfgghfg      ");
-	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
-	//g_sh.str = ft_strdup("\"a\"	b\"	c\"	d\"\"\" 	 \'	   \'  b");
-	//g_sh.str = ft_strdup ("text");
 	init_shell(env);
 	while (!g_sh.stop_flag)
 	{
@@ -93,15 +86,14 @@ int	main(int argc, char **argv, char **env)
 		if (!ch_err)
 		{
 			printf("g_sh.str= %s\n", g_sh.str);
-			parser(g_sh.str, env);
-			executor(g_sh.res_pars, env);
+			parser(g_sh.str, g_sh.env);
+			executor(g_sh.res_pars, g_sh.env);
 			//g_sh.stop_flag = 1;
 		}
 		else
 			printf("command error\n");
 		printf("g_sh.str = %s\n", g_sh.str); //
 		free_g_sh();
-		//system("leaks executablename");
 	}
 	free_and_exit(0);
 	return (0);
