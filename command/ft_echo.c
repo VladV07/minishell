@@ -6,13 +6,13 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 20:04:53 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/09 15:07:15 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 17:23:47 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
- 
-int	ft_echo (char **str)
+
+int	ft_echo(char **str)
 {
 	int	i;
 	int	n;

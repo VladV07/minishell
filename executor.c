@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 15:01:56 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 17:03:32 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	do_command(char **cmd_and_args, int nb_command)
 	if (nb_command == 2)
 		ft_pwd();
 	if (nb_command == 3)
-		ft_export();
+		ft_export(cmd_and_args);
 	// if (nb_command == 4)
 	// 	unset(cmd_and_args);
 	if (nb_command == 5)

@@ -6,18 +6,49 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:55:17 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/12 15:30:01 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 17:24:03 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void ft_export(void)
+char	**ft_env_join(char **env, char **arv)
+{
+	char	**nenv;
+	int		i;
+	int		j;
+	int		len;
+
+	i = -1;
+	j = 0;
+	len = ft_len_env(env) + ft_len_env(arv);
+	nenv = (char **)malloc(sizeof(char **) * len);
+	nenv[len] = NULL;
+	while (env[++i])
+	{
+		nenv[i] = (char *)malloc(sizeof(char *) * ft_strlen(env[i]));
+		nenv[i] = memcpy(nenv[i], env[i], ft_strlen(env[i]));
+	}
+	while (arv[++j])
+	{
+		nenv[++i] = (char *)malloc(sizeof(char *) * strlen(arv[j]));
+		nenv[i] = ft_memcpy(nenv[i], arv[j], ft_strlen(arv[j]));
+	}
+	free(env);
+	return (nenv);
+}
+
+void	ft_export(char **cmd_and_args)
 {
 	int	i;
 
 	i = 0;
-	while (g_sh.env[i])
-		printf("%s\n", g_sh.env[i++]);
+	if (cmd_and_args[1])
+		g_sh.env = ft_env_join(g_sh.env, cmd_and_args);
+	else
+	{
+		while (g_sh.env[i])
+			printf("\n%s\n", g_sh.env[i++]);
+	}
 	printf("!!!!!!!!!!!!!!!!env!!!!!!!!!!!!!!!!!!!!!!");
 }
