@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 17:10:03 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:45:01 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_data{
 	t_list		env_list;
 	int			stop_flag;
 	int			plase_redirect;
+	int			err_exit;
 }	t_data;
 
 t_data	g_sh;

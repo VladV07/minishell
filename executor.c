@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 17:03:32 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:45:27 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	do_command(char **cmd_and_args, int nb_command)
 {
 	(void)cmd_and_args;
 	if (nb_command == 0)
-		ft_echo(cmd_and_args);
+		g_sh.err_exit = ft_echo(cmd_and_args);
 	// if (nb_command == 1)
 	// 	cd(cmd_and_args);
 	if (nb_command == 2)
