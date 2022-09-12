@@ -116,7 +116,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (str);
 	}
 	else
+	{
 		str = malloc(end - start + 2);
+	}
 	if (str == NULL)
 		return (NULL);
 	ft_do(s1, str, start, end);

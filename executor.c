@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 18:45:27 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 20:16:09 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	print_arr_g_sh_cmd_and_args(void)
 
 void	do_command(char **cmd_and_args, int nb_command)
 {
-	(void)cmd_and_args;
 	if (nb_command == 0)
 		g_sh.err_exit = ft_echo(cmd_and_args);
 	// if (nb_command == 1)

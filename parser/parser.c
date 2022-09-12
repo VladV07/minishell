@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:37:47 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/05 19:59:30 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:52:55 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	parser(char *str, char **env)
 	free(str_pars_tmp);
 	printf("g_sh.str = %s\n", g_sh.str); //
 	printf("str = %s\n", str); //
-	free(str);
+	//printf("str pars addr= %p\n", &str);
+	//free(str);
 	print_arr_g_sh_res_pars();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/12 18:24:07 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:38:43 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 int	ft_check(char *str)
 {
-	int	len;
-	int i;
+	int		len;
+	int		i;
+	char	*str_new;
 
 	i = -1;
-	str = ft_strtrim(str, " ");
-	len = ft_strlen(str);
-	if (str[len - 1] == '&' || str[len - 1] == '|'
-		||str[len - 1] == '>' || str[len - 1] == '<')
+	str_new = ft_strtrim(str, " ");
+	len = ft_strlen(str_new);
+	if (str_new[len - 1] == '&' || str_new[len - 1] == '|'
+		||str_new[len - 1] == '>' || str_new[len - 1] == '<')
 		return (1);
-	while (str[++i])
+	while (str_new[++i])
 	{
-		if (str[i] == '&' && str[i + 1] == '&')
+		if (str_new[i] == '&' && str_new[i + 1] == '&')
 			return (1);
-		if (str[i] == '|' && str[i + 1] == '|')
+		if (str_new[i] == '|' && str_new[i + 1] == '|')
 			return (1);
 	}
+	free(str_new);
 	return (0);
 }
 
@@ -62,29 +64,30 @@ int	lexer(char *str)
 		else if ((str[i] == '>' && str[i + 1] == '>') || (str[i] == '<' && str[i + 1] == '<'))
 		{
 			c[0] = str[i++];
- 			new_str = ft_strjoin_free(new_str, c);
 			new_str = ft_strjoin_free(new_str, c);
+			new_str = ft_strjoin_free(new_str, c);
+
 		}		
 		else if ((str[i] != ' ' && str[i]) && (str[i + 1] == '>' || str[i + 1] == '<' || str[i + 1] == '&' || str[i + 1] == '|'))
 		{
- 			c[0] = str[i];
- 			new_str = ft_strjoin_free(new_str, c);
+			c[0] = str[i];
+			new_str = ft_strjoin_free(new_str, c);
+
 			if (str[i + 1] != '>' || str[i + 1] != '<')
 			{
 				c[0] = ' ';
- 				new_str = ft_strjoin_free(new_str, c);
+				new_str = ft_strjoin_free(new_str, c);
 			}
 		}
 		else
 		{
- 			c[0] = str[i];
- 			new_str = ft_strjoin_free(new_str, c);
-					
+			c[0] = str[i];
+			new_str = ft_strjoin_free(new_str, c);
 		}
 		if (str[i + 1] != ' ' && (str[i] == '|' || str[i] == '&' || str[i] == '<' || str[i] == '>'))
 		{
 			c[0] = ' ';
-			new_str = ft_strjoin_free(new_str, c);				
+			new_str = ft_strjoin_free(new_str, c);
 		}		
 	}
 	free(c);

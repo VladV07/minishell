@@ -3,48 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 18:27:39 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:43:10 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_len_env(char **env)
+int	ft_len_env(char **env)
 {
 	int	i;
 	int	len;
 
 	i = -1;
 	len = 0;
-	while(env[++i])
+	while (env[++i])
 		len++;
-	return(len);
+	return (len);
 }
 
 char	**ft_cpy_env(char **nenv, char **env)
 {
 	int	i;
-	int	j;
+	//int	j;
 
 	i = -1;
 	while (env[++i])
 	{
-		j = -1;
-		while (env[i][++j])
-		{
+		//j = -1;
+		//while (env[i][++j])
+		//{
 			nenv[i] = (char *)malloc(sizeof(char *) * strlen(env[i]));
 			nenv[i] = memcpy(nenv[i], env[i], strlen(env[i]));
-		}
+		//}
 	}
-	return(nenv);
+	return (nenv);
 }
 
 void	ft_get_in_env(char **env)
 {
-	int len;
+	int	len;
 
 	len = ft_len_env(env);
 	g_sh.env = (char **)malloc(sizeof(char **) * len + 1);
@@ -92,7 +92,6 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 			printf("command error\n");
-		printf("g_sh.str = %s\n", g_sh.str); //
 		free_g_sh();
 	}
 	free_and_exit(0);

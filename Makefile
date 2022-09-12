@@ -16,11 +16,9 @@ HEADER = minishell.h
 
 PARSER = parser/
 
+COMMAND = command/
+
 LIST =  minishell.c \
-		ft_lstclear.c \
-		ft_lstlast.c \
-		ft_lstnew.c \
-		ft_pushback.c \
 		ft_readline.c \
 		ft_strjoin_free.c \
 		lexer.c \
@@ -35,10 +33,10 @@ LIST =  minishell.c \
 		executor.c \
 		free_and_exit.c \
 		ft_strcmp.c \
-		command/ft_echo.c \
-		command/ft_pwd.c \
-		command/ft_env.c \
-		command/ft_export.c
+		$(COMMAND)ft_echo.c \
+		$(COMMAND)ft_pwd.c \
+		$(COMMAND)ft_env.c \
+		$(COMMAND)ft_export.c
 
 
 LIBFT = ./libft/libft.a 
