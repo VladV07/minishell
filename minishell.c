@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 21:43:10 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:45:45 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_len_env(char **env)
+int	ft_len_env(char **genv)
 {
 	int	i;
 	int	len;
 
 	i = -1;
 	len = 0;
-	while (env[++i])
+	while (genv[++i])
 		len++;
 	return (len);
 }

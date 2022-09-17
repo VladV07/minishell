@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 20:16:09 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/17 15:12:59 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	do_command(char **cmd_and_args, int nb_command)
 		ft_pwd();
 	if (nb_command == 3)
 		ft_export(cmd_and_args);
-	// if (nb_command == 4)
-	// 	unset(cmd_and_args);
+	if (nb_command == 4)
+		ft_unset(cmd_and_args);
 	if (nb_command == 5)
 		ft_env();
 	if (nb_command == 6)

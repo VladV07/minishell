@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 18:45:01 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:34:19 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,13 @@ void	free_and_exit(int err_nb);
 void	free_g_sh(void);
 void	print_arr_g_sh_res_pars(void); // для проверки убрать
 int		ft_strcmp(char *str1, char *str2);
+int		ft_strcmp_unequals(char *str1, char *str2);
+void	ft_free_env(char **env);
 int		ft_echo (char **str);
 int		ft_pwd(void);
 void	ft_export(char **cmd_and_args);
 void	ft_env(void);
 int		ft_len_env(char **env);
+int		ft_unset(char **cmd_and_args);
 
 #endif
