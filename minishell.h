@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/19 03:41:53 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/19 04:37:57 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		ft_strcmp(char *str1, char *str2);
 int		ft_strcmp_unequals(char *str1, char *str2);
 void	ft_free_env(char **env);
 char	*ft_get_env(char *str);
+int		ft_set_env(char *c, char *var);
 int		ft_echo (char **str);
 int		ft_pwd(void);
 void	ft_export(char **cmd_and_args);

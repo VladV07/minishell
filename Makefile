@@ -40,7 +40,7 @@ LIST =  minishell.c \
 		$(COMMAND)ft_unset.c \
 		$(COMMAND)ft_free_env.c \
 		$(COMMAND)ft_cd.c \
-		$(COMMAND)ft_get_env.c
+		$(COMMAND)ft_work_env.c \
 
 
 LIBFT = ./libft/libft.a 
