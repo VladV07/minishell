@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 16:58:50 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/19 04:59:27 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/20 06:36:00 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	ft_cd(char **str)
 {
 	char	c[1024];
 
-	getcwd(c, 1024);
 	if (str[1] == NULL)
 		return (ft_go_home());
+	getcwd(c, 1024);
 	if (chdir(str[1]) < 0)
 		return (1);
 	ft_set_env(&c[0], "OLDPWD");

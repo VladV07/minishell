@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/18 17:03:30 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:55:10 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,23 @@ void	print_arr_g_sh_cmd_and_args(void)
 
 void	do_command(char **cmd_and_args, int nb_command)
 {
+	g_sh.err_exit = 0;
 	if (nb_command == 0)
 		g_sh.err_exit = ft_echo(cmd_and_args);
 	if (nb_command == 1)
-		ft_cd(cmd_and_args);
+		g_sh.err_exit = ft_cd(cmd_and_args);
 	if (nb_command == 2)
-		ft_pwd();
+		g_sh.err_exit = ft_pwd();
 	if (nb_command == 3)
 		ft_export(cmd_and_args);
 	if (nb_command == 4)
-		ft_unset(cmd_and_args);
+		g_sh.err_exit = ft_unset(cmd_and_args);
 	if (nb_command == 5)
 		ft_env();
 	if (nb_command == 6)
 		g_sh.stop_flag = 1;
+	if (g_sh.err_exit == 1)
+		printf("Command error: %s\n", cmd_and_args[0]);
 }
 
 int	do_redirections(char **res_pars)
