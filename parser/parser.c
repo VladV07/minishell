@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:37:47 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 21:52:55 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:32:55 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	kostyl_return(void)
 			{
 				if (g_sh.res_pars[i][j][k] == '\t')
 					g_sh.res_pars[i][j][k] = ' ';
+				if (g_sh.res_pars[i][j][k] == '\v')
+					g_sh.res_pars[i][j][k] = '|';
 				k++;
 			}
 			j++;

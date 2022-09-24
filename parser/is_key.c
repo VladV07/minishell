@@ -6,7 +6,7 @@
 /*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:20:55 by stapioca          #+#    #+#             */
-/*   Updated: 2022/08/10 18:46:19 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:08:05 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_key(char ch)
 {
-	if (ch == '_' || ft_isalnum(ch))
+	if (ch == '_' || ft_isalnum(ch) || ch == '?')
 	{
 		return (1);
 	}

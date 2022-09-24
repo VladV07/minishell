@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/17 17:45:45 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:31:55 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,12 @@ int	ft_len_env(char **genv)
 char	**ft_cpy_env(char **nenv, char **env)
 {
 	int	i;
-	//int	j;
 
 	i = -1;
 	while (env[++i])
 	{
-		//j = -1;
-		//while (env[i][++j])
-		//{
-			nenv[i] = (char *)malloc(sizeof(char *) * strlen(env[i]));
-			nenv[i] = memcpy(nenv[i], env[i], strlen(env[i]));
-		//}
+		nenv[i] = (char *)malloc(sizeof(char *) * strlen(env[i]));
+		nenv[i] = memcpy(nenv[i], env[i], strlen(env[i]));
 	}
 	return (nenv);
 }
@@ -82,6 +77,8 @@ int	main(int argc, char **argv, char **env)
 	while (!g_sh.stop_flag)
 	{
 		g_sh.str = readline("minishell $");
+		if (g_sh.str)
+			add_history(g_sh.str);
 		ch_err = lexer(g_sh.str);
 		if (!ch_err)
 		{

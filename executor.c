@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/19 15:55:10 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/25 00:30:32 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	print_arr_g_sh_cmd_and_args(void)
 		i++;
 	}
 }
-
 
 void	do_command(char **cmd_and_args, int nb_command)
 {
@@ -57,16 +56,6 @@ int	do_redirections(char **res_pars)
 	while (res_pars[i])
 		i++;
 	g_sh.cmd_and_args = (char **)malloc(sizeof(char *) * (i + 1));
-	// i = 0;
-	// while (res_pars[i])
-	// {
-	// 	j = 0;
-	// 	while (res_pars[i][j])
-	// 		j++;
-	// 	g_sh.cmd_and_args[i] = (char *)malloc(sizeof(char) * j);
-	// 	i++;
-	// }
-	
 	//if (!g_sh.cmd_and_args)
 	//	exit_err;
 	i = 0;
@@ -92,7 +81,31 @@ int	do_redirections(char **res_pars)
 		}
 		else if (strcmp(res_pars[i], "<<") == 0) //
 		{
-			g_sh.fd_stdin = open(res_pars[++i], O_RDONLY, 0664);
+			char	*str;
+			char	*str_new;
+
+			i++;
+			g_sh.fd_stdin = open("heredog", O_WRONLY | O_CREAT | O_TRUNC, 0664);
+			while (1)
+			{
+				str = readline("heredog>");
+				if (ft_strcmp(str, res_pars[i]) == 0) //
+				{
+					printf("str == res_pars[i]\n");
+					//free(str);
+					close(g_sh.fd_stdin);
+					g_sh.fd_stdin = open("heredog", O_RDONLY, 0664);
+					break ;
+				}
+				str_new = ft_strjoin(str, "\n");
+				free(str);
+				printf("res_pars[i]=  %s\n", res_pars[i]);
+				printf("str_new=  %s\n", str_new);
+				write(g_sh.fd_stdin, str_new, ft_strlen(str_new));
+				//free(str_new);
+			}
+			//g_sh.fd_stdin = open(res_pars[++i], O_RDONLY, 0664);
+			
 			rd_in = 1;
 		}
 		else
@@ -147,7 +160,7 @@ void	executor(char ***res_pars, char **env)
 
 		if (i == (count - 1))
 		{
-			if (rd != 3 && rd != 1)
+			if (rd == 0 || rd == 2)
 				g_sh.fd_stdout = dup(tmpout);
 		}
 		else
@@ -161,12 +174,20 @@ void	executor(char ***res_pars, char **env)
 		close(g_sh.fd_stdout);
 		j = 0;
 		get_command = 0;
+		//print_arr_g_sh_cmd_and_args();
 		while (g_sh.commands[j])
 		{
-			if (strcmp(g_sh.cmd_and_args[0], g_sh.commands[j]) == 0) // потом поменять на ft_strcmp
+			if (!g_sh.cmd_and_args[0])
+				break ;
+			if (ft_strcmp(g_sh.cmd_and_args[0], g_sh.commands[j]) == 0)
 			{
 				printf("command= %s, j = %d\n", g_sh.commands[j], j);
 				do_command(res_pars[i], j);
+				g_sh.err_exit = 0;
+				//g_sh.for_export[0] = ft_strdup("export");
+				//g_sh.for_export[1] = ft_strdup("?=222");
+				//g_sh.for_export[2] = NULL;
+				//ft_export(g_sh.for_export);
 				get_command = 1;
 			}
 			j++;
@@ -202,6 +223,8 @@ void	executor(char ***res_pars, char **env)
 		free(g_sh.cmd_and_args);
 		i++;
 	}
+	dup2(tmpin, 0);
+	dup2(tmpout, 1);
 	close(tmpin);
 	close(tmpout);
 }

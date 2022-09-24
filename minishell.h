@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/19 04:37:57 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:07:08 by stapioca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <sys/errno.h>
 # include "libft/libft.h"
 # include <string.h>  // потом убрать
@@ -45,6 +46,7 @@ typedef struct s_data{
 	int			stop_flag;
 	int			plase_redirect;
 	int			err_exit;
+	char		*for_export[3];
 }	t_data;
 
 t_data	g_sh;
@@ -64,6 +66,7 @@ void	executor(char ***res_pars, char **env);
 void	free_and_exit(int err_nb);
 void	free_g_sh(void);
 void	print_arr_g_sh_res_pars(void); // для проверки убрать
+void	print_arr_g_sh_cmd_and_args(void); // для проверки убрать
 int		ft_strcmp(char *str1, char *str2);
 int		ft_strcmp_unequals(char *str1, char *str2);
 void	ft_free_env(char **env);
