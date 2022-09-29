@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:02:38 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/17 18:45:35 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:33:16 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_unset(char **cmd_and_args)
 	equals = ft_equals(cmd_and_args[1]);
 	if (ft_search(equals, cmd_and_args[1]) == 1)
 		return (1);
-	len = ft_len_env(g_sh.env) - 1;
+	len = ft_len_env(g_sh.env);
 	nenv = (char **)malloc(sizeof(char **) * len);
 	nenv[len] = NULL;
 	nenv = ft_work_nenv(nenv, equals, cmd_and_args[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/24 22:07:08 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:14:43 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	free_and_exit(int err_nb);
 void	free_g_sh(void);
 void	print_arr_g_sh_res_pars(void); // для проверки убрать
 void	print_arr_g_sh_cmd_and_args(void); // для проверки убрать
+
 int		ft_strcmp(char *str1, char *str2);
 int		ft_strcmp_unequals(char *str1, char *str2);
 void	ft_free_env(char **env);
@@ -79,5 +80,8 @@ void	ft_env(void);
 int		ft_len_env(char **env);
 int		ft_unset(char **cmd_and_args);
 int		ft_cd(char **str);
+
+int		ft_search(int equals, char *str);
+int		ft_equals(char *str);
 
 #endif
