@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:55:17 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/30 17:12:40 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:40:58 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ int	ft_search_nvar(char **env, char *str)
 		j = 0;
 		while (env[i][j] == var[j])
 		{
-			if((env[i][j + 1] == '=' || env[i][j + 1] == '\0') && j == len)
+			if((env[i][j + 1] == '=' || env[i][j + 1] == '\0') && j == len - 1)
 			{
 				free(var);
+				if (str[len] == '\0')
+					return(-1);
 				return (i);
 			}
 			j++;
@@ -87,6 +89,11 @@ char	**ft_env_join(char **env, char **arv)
 		str = ft_memcpy(str, arv[1], len);
 		nenv = ft_nenv(env, str, i);
 	}
+	else if (i < 0)
+	{
+		printf("AHUET !!!!!!!!!!!!!!! %d !!!!!!!!!\n", i);
+		return(env);
+	}
 	else
 	{
 		i = -1;
@@ -107,15 +114,10 @@ char	**ft_env_join(char **env, char **arv)
 
 void	ft_export(char **cmd_and_args)
 {
-	int	i;
-
-	i = 0;
 	if (cmd_and_args[1])
 		g_sh.env = ft_env_join(g_sh.env, cmd_and_args);
 	else
-	{
-		while (g_sh.env[i])
-			printf("%s\n", g_sh.env[i++]);
-	}
+		ft_print_env();
+
 	printf("!!!!!!!!!!!!!!!!export!!!!!!!!!!!!!!!!!!!!!!");
 }

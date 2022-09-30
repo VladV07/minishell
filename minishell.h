@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/29 17:14:43 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:40:48 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ int		ft_cd(char **str);
 
 int		ft_search(int equals, char *str);
 int		ft_equals(char *str);
+int		ft_print_env(void);
 
 #endif
