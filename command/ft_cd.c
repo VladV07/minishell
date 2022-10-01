@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 16:58:50 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/20 06:36:00 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/01 00:14:36 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	ft_go_home(void)
 	getcwd(dir, 1024);
 	c = ft_get_env("HOME");
 	if (c == NULL)
-		return (1);			//директория не найдена
+		return (1);
 	ndir = ft_split(c, '=');
 	chdir(ndir[1]);
 	ft_free_env(ndir);
 	ft_set_env(&dir[0], "OLDPWD");
 	getcwd(dir, 1024);
-	ft_set_env(&dir[0], "PWD");	
+	ft_set_env(&dir[0], "PWD");
 	return (0);
 }
 

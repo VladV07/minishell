@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:02:38 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/29 18:33:16 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/01 15:25:22 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,15 @@ char	**ft_work_nenv(char **nenv, int equals, char *str)
 	i = -1;
 	j = -1;
 	if (equals == 0)
-	{
-		while (g_sh.env[++i])
-		{
-			if (ft_strcmp(g_sh.env[i], str) != 0)
-			{
-				nenv[++j] = (char *)malloc(sizeof(char *) * ft_strlen(g_sh.env[i]));
-				nenv[j] = memcpy(nenv[j], g_sh.env[i], ft_strlen(g_sh.env[i]));
-			}
-		}
-	}
+		nenv = ft_unset_cpy(str, nenv);
 	else
 	{
 		while (g_sh.env[++i])
 		{
 			if (ft_strcmp_unequals(g_sh.env[i], str) != 0)
 			{
-				nenv[++j] = (char *)malloc(sizeof(char *) * ft_strlen(g_sh.env[i]));
+				nenv[++j] = (char *)malloc(sizeof(char *) \
+					* ft_strlen(g_sh.env[i]));
 				nenv[j] = memcpy(nenv[j], g_sh.env[i], ft_strlen(g_sh.env[i]));
 			}
 		}

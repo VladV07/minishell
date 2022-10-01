@@ -6,16 +6,40 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:55:17 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/30 22:40:58 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/01 16:08:08 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+int	ft_sea_nvar(char **env, char *var, int len, char *str)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (env[++i])
+	{
+		j = 0;
+		while (env[i][j] == var[j])
+		{
+			if ((env[i][j + 1] == '=' || env[i][j + 1] == '\0') && j == len - 1)
+			{
+				free(var);
+				if (str[len] == '\0')
+					return (-1);
+				return (i);
+			}
+			j++;
+		}
+	}	
+	free(var);
+	return (0);
+}
+
 int	ft_search_nvar(char **env, char *str)
 {
 	int		i;
-	int		j;
 	int		len;
 	char	*var;
 
@@ -26,24 +50,7 @@ int	ft_search_nvar(char **env, char *str)
 	var = (char *)malloc(sizeof(char *) * (len + 1));
 	var[len] = '\0';
 	var = ft_memcpy(var, str, len);
-	i = -1;
-	while (env[++i])
-	{
-		j = 0;
-		while (env[i][j] == var[j])
-		{
-			if((env[i][j + 1] == '=' || env[i][j + 1] == '\0') && j == len - 1)
-			{
-				free(var);
-				if (str[len] == '\0')
-					return(-1);
-				return (i);
-			}
-			j++;
-		}
-	}	
-	free(var);
-	return(0);
+	return (ft_sea_nvar(env, var, len, str));
 }
 
 char	**ft_nenv(char **env, char *str, int i)
@@ -70,7 +77,7 @@ char	**ft_nenv(char **env, char *str, int i)
 		}
 	}
 	free(str);
-	return(nenv);
+	return (nenv);
 }
 
 char	**ft_env_join(char **env, char **arv)
@@ -90,24 +97,9 @@ char	**ft_env_join(char **env, char **arv)
 		nenv = ft_nenv(env, str, i);
 	}
 	else if (i < 0)
-	{
-		printf("AHUET !!!!!!!!!!!!!!! %d !!!!!!!!!\n", i);
-		return(env);
-	}
+		return (env);
 	else
-	{
-		i = -1;
-		len = ft_len_env(env) + 1;
-		nenv = (char **)malloc(sizeof(char **) * (len + 1));
-		nenv[len] = NULL;
-		while (env[++i])
-		{
-			nenv[i] = (char *)malloc(sizeof(char *) * ft_strlen(env[i]));
-			nenv[i] = ft_memcpy(nenv[i], env[i], ft_strlen(env[i]));
-		}
-		nenv[i] = (char *)malloc(sizeof(char *) * strlen(arv[1]));
-		nenv[i] = ft_memcpy(nenv[i], arv[1], ft_strlen(arv[1]));
-	}
+		nenv = ft_norm_help(env, arv);
 	ft_free_env(env);
 	return (nenv);
 }
@@ -118,6 +110,5 @@ void	ft_export(char **cmd_and_args)
 		g_sh.env = ft_env_join(g_sh.env, cmd_and_args);
 	else
 		ft_print_env();
-
 	printf("!!!!!!!!!!!!!!!!export!!!!!!!!!!!!!!!!!!!!!!");
 }

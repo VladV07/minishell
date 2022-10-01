@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 03:22:51 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/20 06:40:22 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/01 00:25:03 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_set_env(char *c, char *var)
 	int		i;
 	char	**envst;
 	char	*str;
-	
+
 	i = -1;
 	str = (char *)malloc(sizeof(char *));
 	str[0] = '\0';
