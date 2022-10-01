@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <sys/signal.h>
 
-static char	*do_s2(char const *s2, unsigned int	size_s2, \
-				unsigned int	i, char *str)
+static char	*do_s2(char const *s2, unsigned int size_s2, \
+				unsigned int i, char *str)
 {
 	unsigned int	j;
 

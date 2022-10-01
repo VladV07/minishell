@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/12 21:38:43 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/10/01 17:18:40 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,20 @@ int	lexer(char *str)
 		else if (str[i] == '\'' && !(field % 2))
 			exp_field++;
 		if ((str[i] == ' ' && (str[i + 1] == ' ') && ((field % 2) == 0) \
-	 			&& ((exp_field % 2) == 0)) || ((str[i] >= 9) && (str[i] <= 13)))
-	 		;
-		else if ((str[i] == '>' && str[i + 1] == '>') || (str[i] == '<' && str[i + 1] == '<'))
+				&& ((exp_field % 2) == 0)) || ((str[i] >= 9) && (str[i] <= 13)))
+			;
+		else if ((str[i] == '>' && str[i + 1] == '>') || (str[i] == '<' \
+				&& str[i + 1] == '<'))
 		{
 			c[0] = str[i++];
 			new_str = ft_strjoin_free(new_str, c);
 			new_str = ft_strjoin_free(new_str, c);
-
 		}		
-		else if ((str[i] != ' ' && str[i]) && (str[i + 1] == '>' || str[i + 1] == '<' || str[i + 1] == '&' || str[i + 1] == '|'))
+		else if ((str[i] != ' ' && str[i]) && (str[i + 1] == '>' \
+				|| str[i + 1] == '<' || str[i + 1] == '&' || str[i + 1] == '|'))
 		{
 			c[0] = str[i];
 			new_str = ft_strjoin_free(new_str, c);
-
 			if (str[i + 1] != '>' || str[i + 1] != '<')
 			{
 				c[0] = ' ';
@@ -84,7 +84,8 @@ int	lexer(char *str)
 			c[0] = str[i];
 			new_str = ft_strjoin_free(new_str, c);
 		}
-		if (str[i + 1] != ' ' && (str[i] == '|' || str[i] == '&' || str[i] == '<' || str[i] == '>'))
+		if (str[i + 1] != ' ' && (str[i] == '|' || str[i] == '&' \
+			|| str[i] == '<' || str[i] == '>'))
 		{
 			c[0] = ' ';
 			new_str = ft_strjoin_free(new_str, c);
