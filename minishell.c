@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/01 16:16:59 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/01 20:27:53 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ int	main(int argc, char **argv, char **env)
 			printf("g_sh.str= %s\n", g_sh.str);
 			parser(g_sh.str, g_sh.env);
 			executor(g_sh.res_pars, g_sh.env);
+			free_g_sh();
 		}
 		else
 			printf("command error\n");
-		free_g_sh();
 	}
 	free_and_exit(0);
 	return (0);

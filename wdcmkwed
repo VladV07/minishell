@@ -1,0 +1,6 @@
+minishell: echocwdcwdc: command not found
+free_g_sh: res_pars free.
+free_and_exit: 1
+free_g_sh: commands free.
+free_g_sh: env free.
+minishell: error 1
