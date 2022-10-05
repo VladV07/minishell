@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 19:19:38 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/12 21:42:49 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:47:11 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ void	free_and_exit(int err_nb)
 		free(g_sh.commands[i++]);
 	free(g_sh.commands);
 	printf("free_g_sh: commands free.\n");
-
 	i = 0;
 	while (g_sh.env[i])
 		free(g_sh.env[i++]);
 	free(g_sh.env);
 	printf("free_g_sh: env free.\n");
-	
 	if (err_nb == 0)
 	{
 		printf("free_and_exit: 2\n");

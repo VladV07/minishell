@@ -43,7 +43,8 @@ LIST =  minishell.c \
 		$(COMMAND)ft_work_env.c \
 		$(COMMAND)ft_print_env.c \
 		$(COMMAND)ft_unset_cpy.c \
-		$(COMMAND)ft_norm_help.c
+		$(COMMAND)ft_norm_help.c \
+		$(COMMAND)ft_exit.c
 
 
 LIBFT = ./libft/libft.a 

@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/01 20:27:53 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:53:09 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	init_shell(env);
+	// signal(SIGINT, ctrl_c);
+	// signal(SIGQUIT, SIG_IGN);
 	while (!g_sh.stop_flag)
 	{
 		g_sh.str = readline("minishell $");

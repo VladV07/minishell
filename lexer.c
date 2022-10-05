@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:13 by njohanne          #+#    #+#             */
-/*   Updated: 2022/10/01 20:54:40 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:45:25 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,28 @@ void	ft_field(int *exp_field, int *field, char *c)
 		(*exp_field)++;
 }
 
+char	*ft_tak_nad(char *str, int i, char *c, char *old_str_n)
+{
+	char	*new_str;
+
+	new_str = (char *)malloc(sizeof(char));
+	new_str[0] = '\0';
+	new_str = ft_strjoin_free(new_str, old_str_n);
+	if ((str[i] != ' ' && str[i]) && (str[i + 1] == '>' \
+		|| str[i + 1] == '<' || str[i + 1] == '&' || str[i + 1] == '|'))
+	{
+		new_str = ft_strjoin_free(new_str, c);
+		if (str[i + 1] != '>' || str[i + 1] != '<')
+			new_str = ft_strjoin_free(new_str, " ");
+	}
+	else
+		new_str = ft_strjoin_free(new_str, c);
+	if (str[i + 1] != ' ' && (str[i] == '|' || str[i] == '&' \
+		|| str[i] == '<' || str[i] == '>'))
+		new_str = ft_strjoin_free(new_str, " ");
+	return (new_str);
+}
+
 char	*ft_new_str(char *str, int *exp_field, int *field, char *new_str)
 {
 	int		i;
@@ -65,18 +87,8 @@ char	*ft_new_str(char *str, int *exp_field, int *field, char *new_str)
 			new_str = ft_strjoin_free(new_str, c);
 			new_str = ft_strjoin_free(new_str, c);
 		}		
-		else if ((str[i] != ' ' && str[i]) && (str[i + 1] == '>' \
-			|| str[i + 1] == '<' || str[i + 1] == '&' || str[i + 1] == '|'))
-		{
-			new_str = ft_strjoin_free(new_str, c);
-			if (str[i + 1] != '>' || str[i + 1] != '<')
-				new_str = ft_strjoin_free(new_str, " ");
-		}
 		else
-			new_str = ft_strjoin_free(new_str, c);
-		if (str[i + 1] != ' ' && (str[i] == '|' || str[i] == '&' \
-			|| str[i] == '<' || str[i] == '>'))
-			new_str = ft_strjoin_free(new_str, " ");
+			new_str = ft_tak_nad(str, i, c, new_str);
 	}
 	free(c);
 	return (new_str);
