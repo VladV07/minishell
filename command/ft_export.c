@@ -91,7 +91,7 @@ char	**ft_env_join(char **env, char **arv)
 	if (i > 0)
 	{
 		len = ft_strlen(arv[1]);
-		str = (char *)malloc(sizeof(char *) * (len + 1));
+		str = (char *)malloc(sizeof(char) * (len + 1));
 		str[len] = '\0';
 		str = ft_memcpy(str, arv[1], len);
 		nenv = ft_nenv(env, str, i);

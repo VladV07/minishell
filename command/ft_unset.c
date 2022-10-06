@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:02:38 by njohanne          #+#    #+#             */
-/*   Updated: 2022/10/01 15:25:22 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:41:48 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ char	**ft_work_nenv(char **nenv, int equals, char *str)
 		nenv = ft_unset_cpy(str, nenv);
 	else
 	{
+		printf("\n\n\n\n");
 		while (g_sh.env[++i])
 		{
 			if (ft_strcmp_unequals(g_sh.env[i], str) != 0)
 			{
-				nenv[++j] = (char *)malloc(sizeof(char *) \
+				printf("%s\n\n", g_sh.env[i]);
+				nenv[++j] = (char *)malloc(sizeof(char) \
 					* ft_strlen(g_sh.env[i]));
 				nenv[j] = memcpy(nenv[j], g_sh.env[i], ft_strlen(g_sh.env[i]));
 			}
@@ -76,6 +78,7 @@ int	ft_search(int equals, char *str)
 	{
 		while (g_sh.env[++i])
 		{
+			printf("%s\n\n", g_sh.env[i]);
 			if (ft_strcmp_unequals(g_sh.env[i], str) == 0)
 				return (0);
 		}
@@ -95,7 +98,7 @@ int	ft_unset(char **cmd_and_args)
 	if (ft_search(equals, cmd_and_args[1]) == 1)
 		return (1);
 	len = ft_len_env(g_sh.env);
-	nenv = (char **)malloc(sizeof(char **) * len);
+	nenv = (char **)malloc(sizeof(char *) * len);
 	nenv[len] = NULL;
 	nenv = ft_work_nenv(nenv, equals, cmd_and_args[1]);
 	ft_free_env(g_sh.env);

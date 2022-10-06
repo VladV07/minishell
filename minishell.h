@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/05 15:59:48 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:07:24 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/errno.h>
 # include "libft/libft.h"
 # include <string.h>  // потом убрать
-#include <signal.h>
+# include <signal.h>
 
 typedef struct s_list{
 	int				data;
@@ -68,7 +68,8 @@ void	free_and_exit(int err_nb);
 void	free_g_sh(void);
 void	print_arr_g_sh_res_pars(void); // для проверки убрать
 void	print_arr_g_sh_cmd_and_args(void); // для проверки убрать
-void	ctrl_c(int value);
+void	ctrl_c(int val);
+void	ctrl_d(void);
 
 int		ft_strcmp(char *str1, char *str2);
 int		ft_strcmp_unequals(char *str1, char *str2);

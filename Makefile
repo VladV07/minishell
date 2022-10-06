@@ -3,77 +3,78 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+         #
+#    By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/20 19:04:36 by stapioca          #+#    #+#              #
-#    Updated: 2022/04/20 19:04:36 by stapioca         ###   ########.fr        #
+#    Created: 2022/03/08 19:16:05 by bkristen          #+#    #+#              #
+#    Updated: 2022/10/06 20:18:22 by njohanne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
-
-HEADER = minishell.h
+NAME		= minishell
 
 PARSER = parser/
 
 COMMAND = command/
 
-LIST =  minishell.c \
-		ft_readline.c \
-		ft_strjoin_free.c \
-		lexer.c \
-		$(PARSER)get_dollar.c \
-		$(PARSER)get_double_quotes.c \
-		$(PARSER)get_in_env.c \
-		$(PARSER)get_quote.c \
-		$(PARSER)get_slesh.c \
-		$(PARSER)is_key.c \
-		$(PARSER)ln_env.c \
-		$(PARSER)parser.c \
-		executor.c \
-		free_and_exit.c \
-		ft_strcmp.c \
-		$(COMMAND)ft_echo.c \
-		$(COMMAND)ft_pwd.c \
-		$(COMMAND)ft_env.c \
-		$(COMMAND)ft_export.c \
-		$(COMMAND)ft_unset.c \
-		$(COMMAND)ft_free_env.c \
-		$(COMMAND)ft_cd.c \
-		$(COMMAND)ft_work_env.c \
-		$(COMMAND)ft_print_env.c \
-		$(COMMAND)ft_unset_cpy.c \
-		$(COMMAND)ft_norm_help.c \
-		$(COMMAND)ft_exit.c
+SRC			=	minishell.c \
+			ft_readline.c \
+			ft_strjoin_free.c \
+			lexer.c \
+			$(PARSER)get_dollar.c \
+			$(PARSER)get_double_quotes.c \
+			$(PARSER)get_in_env.c \
+			$(PARSER)get_quote.c \
+			$(PARSER)get_slesh.c \
+			$(PARSER)is_key.c \
+			$(PARSER)ln_env.c \
+			$(PARSER)parser.c \
+			executor.c \
+			free_and_exit.c \
+			ft_strcmp.c \
+			$(COMMAND)ft_echo.c \
+			$(COMMAND)ft_pwd.c \
+			$(COMMAND)ft_env.c \
+			$(COMMAND)ft_export.c \
+			$(COMMAND)ft_unset.c \
+			$(COMMAND)ft_free_env.c \
+			$(COMMAND)ft_cd.c \
+			$(COMMAND)ft_work_env.c \
+			$(COMMAND)ft_print_env.c \
+			$(COMMAND)ft_unset_cpy.c \
+			$(COMMAND)ft_norm_help.c \
+			$(COMMAND)ft_exit.c \
+#			signal.c \
 
+HEADER		=	minishell.h
 
-LIBFT = ./libft/libft.a 
+CC			=	cc
 
-READLINE = -lreadline
+FLAGS		= -Wall -Werror -Wextra -g -I$(HEADER) -I/Users/$(USER)/.brew/Cellar/readline/8.1.2/include
 
-OBJS = $(patsubst %.c,%.o,$(LIST))
+RM			=	rm -f
 
-FLAGS = -Wall -Wextra -Werror -g
+OBJ			= $(SRC:.c=.o)
 
-.PHONY : all clean fclean re
+all : libft $(NAME)
+	stty -ctlecho
 
-all : lib $(NAME) $(HEADER)
+$(NAME) : $(OBJ) 
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L/Users/$(USER)/.brew/Cellar/readline/8.1.2/lib/ -lreadline -L./libft -lft
 
-lib :
-	@make -C ./libft
+%.o: %.c $(HEADER) Makefile
+	$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME) : $(OBJS)
-	cc $(FLAGS) $(OBJS) $(LIBFT) $(READLINE) -I $(HEADER) -o $@
-
-%.o : %.c $(HEADER)
-	cc $(FLAGS) -c $< -o $@ -I ${HEADER}
+libft :
+	make -C libft
 
 clean :
-	@rm -f $(OBJS)
-	@make clean -C libft
+	make -C libft clean
+	$(RM) $(OBJ)
 
 fclean : clean
-	@rm -f $(NAME)
-	@make fclean -C libft
+	$(RM) $(NAME)
+	$(RM) libft/libft.a
 
 re : fclean all
+
+.PHONY: all clean fclean re libft
