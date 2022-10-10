@@ -64,7 +64,7 @@ $(NAME) : $(OBJS)
 	ar rcs $(NAME) $?
 
 %.o : %.c libft.h
-	CC $(FLAGS) -c $< -o $@ -I ${HEADER}
+	cc $(FLAGS) -c $< -o $@
 
 clean :
 	@rm -f $(OBJS) $(OBJS_BONUS)

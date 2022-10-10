@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+         #
+#    By: vlad <vlad@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/08 19:16:05 by bkristen          #+#    #+#              #
-#    Updated: 2022/10/06 20:18:22 by njohanne         ###   ########.fr        #
+#    Updated: 2022/10/11 00:08:50 by vlad             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ PARSER = parser/
 
 COMMAND = command/
 
+EXECUTOR = executor/
+
 SRC			=	minishell.c \
-			ft_readline.c \
 			ft_strjoin_free.c \
 			lexer.c \
 			$(PARSER)get_dollar.c \
@@ -28,7 +29,6 @@ SRC			=	minishell.c \
 			$(PARSER)is_key.c \
 			$(PARSER)ln_env.c \
 			$(PARSER)parser.c \
-			executor.c \
 			free_and_exit.c \
 			ft_strcmp.c \
 			$(COMMAND)ft_echo.c \
@@ -43,13 +43,17 @@ SRC			=	minishell.c \
 			$(COMMAND)ft_unset_cpy.c \
 			$(COMMAND)ft_norm_help.c \
 			$(COMMAND)ft_exit.c \
+			$(EXECUTOR)do_herdog.c \
+			$(EXECUTOR)do_redirections.c \
+			$(EXECUTOR)executor.c \
+			$(EXECUTOR)do_command.c \
 #			signal.c \
 
 HEADER		=	minishell.h
 
 CC			=	cc
 
-FLAGS		= -Wall -Werror -Wextra -g -I$(HEADER) -I/Users/$(USER)/.brew/Cellar/readline/8.1.2/include
+FLAGS		=	-Wall -Werror -Wextra -g #-I$(HEADER) -I/Users/$(USER)/.brew/Cellar/readline/8.1.2/include
 
 RM			=	rm -f
 
@@ -59,7 +63,7 @@ all : libft $(NAME)
 	stty -ctlecho
 
 $(NAME) : $(OBJ) 
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L/Users/$(USER)/.brew/Cellar/readline/8.1.2/lib/ -lreadline -L./libft -lft
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -lreadline -L./libft -lft 
 
 %.o: %.c $(HEADER) Makefile
 	$(CC) $(FLAGS) -c $< -o $@

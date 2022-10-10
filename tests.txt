@@ -1,0 +1,5 @@
+make
+./minishell
+ls -la | wc -c | cat | cat > count_str_minishell
+echo "$USER$USER"
+cat << q

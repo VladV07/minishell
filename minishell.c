@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: vlad <vlad@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/06 20:15:39 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:19:51 by vlad             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_data	g_sh;
 
 int	ft_len_env(char **genv)
 {
@@ -84,9 +86,8 @@ int	main(int argc, char **argv, char **env)
 		ch_err = lexer(g_sh.str);
 		if (!ch_err)
 		{
-			printf("g_sh.str= %s\n", g_sh.str);
 			parser(g_sh.str, g_sh.env);
-			executor(g_sh.res_pars, g_sh.env);
+			executor(g_sh.res_pars);
 			free_g_sh();
 		}
 		else

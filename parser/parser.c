@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stapioca <stapioca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlad <vlad@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:37:47 by stapioca          #+#    #+#             */
-/*   Updated: 2022/09/24 15:32:55 by stapioca         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:52:35 by vlad             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,10 @@ void	kostyl_return(void)
 	}
 }
 
-void	parser(char *str, char **env)
+char	*go_on_str_parser(char *str, char **env)
 {
-	char	**str_pars_tmp;
 	int		i;
-	//int		size_str_pars_tmp;
 
-	printf("parser: str = %s\n", str);
 	i = 0;
 	while (str[i])
 	{
@@ -76,41 +73,29 @@ void	parser(char *str, char **env)
 		if (str[i] == '$')
 			str = get_dollar(str, &i, env);
 		i++;
-		//printf("parser: i = %d\n", i);
 	}
-	printf("parser: str = %s\n", str);
-	str_pars_tmp = ft_split(str, '|');
-	printf("parser: str_pars_tmp[0] = %s\n", str_pars_tmp[0]);
-	//i = -1;
-	//size_str_pars_tmp = 0;
-	//while (str_pars_tmp[++i])
-	//	size_str_pars_tmp = size_str_pars_tmp + ft_strlen(str_pars_tmp[i]);
-	//printf("parser: size_str_pars_tmp = %d\n", size_str_pars_tmp);
+	return (str);
+}
 
+void	parser(char *str, char **env)
+{
+	char	**str_pars_tmp;
+	int		i;
+
+	str = go_on_str_parser(str, env);
+	str_pars_tmp = ft_split(str, '|');
 	i = 0;
 	while (str_pars_tmp[i])
 		i++;
 	g_sh.res_pars = (char ***)malloc(sizeof(char **) * \
 								(i + 1));
-								
-	//if (!g_sh.res_pars)
-	//	exit_err();
-	i = 0;
-	while (str_pars_tmp[i])
-	{
-		printf("parser: str_pars_tmp[%d] = %s\n", i, str_pars_tmp[i]);
+	i = -1;
+	while (str_pars_tmp[++i])
 		g_sh.res_pars[i] = ft_split(str_pars_tmp[i], ' ');
-		i++;
-	}
 	g_sh.res_pars[i] = NULL;
 	kostyl_return();
 	i = 0;
 	while (str_pars_tmp[i])
 		free(str_pars_tmp[i++]);
 	free(str_pars_tmp);
-	printf("g_sh.str = %s\n", g_sh.str); //
-	printf("str = %s\n", str); //
-	//printf("str pars addr= %p\n", &str);
-	//free(str);
-	print_arr_g_sh_res_pars();
 }
