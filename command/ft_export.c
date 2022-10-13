@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:55:17 by njohanne          #+#    #+#             */
-/*   Updated: 2022/10/13 19:37:05 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/13 21:21:24 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	**ft_env_join(char **env, char **arv)
 	else if (i < 0)
 		return (env);
 	else
-		nenv = ft_norm_help(env, arv);
+		nenv = ft_norm_help(env, arv[1]);
 	ft_free_env(env);
 	return (nenv);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlad <vlad@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/11 00:52:37 by vlad             ###   ########.fr       */
+/*   Updated: 2022/10/13 21:21:11 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		ft_search(int equals, char *str);
 int		ft_equals(char *str);
 int		ft_print_env(void);
 char	**ft_unset_cpy(char	*str, char **nenv);
-char	**ft_norm_help(char **env, char **arv);
+char	**ft_norm_help(char **env, char *arv);
 
 int		do_herdog(char *res_pars);
 int		do_redirections(char **res_pars);
