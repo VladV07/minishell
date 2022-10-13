@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:26:19 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/13 21:21:11 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/13 21:36:34 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ char	*ft_get_env(char *str);
 int		ft_set_env(char *c, char *var);
 int		ft_echo(char **str);
 int		ft_pwd(void);
-void	ft_export(char **cmd_and_args);
-void	ft_env(void);
+int		ft_export(char **cmd_and_args);
+int		ft_env(void);
 int		ft_len_env(char **env);
 int		ft_unset(char **cmd_and_args);
 int		ft_cd(char **str);

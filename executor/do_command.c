@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_command.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlad <vlad@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 00:06:12 by vlad              #+#    #+#             */
-/*   Updated: 2022/10/11 00:06:18 by vlad             ###   ########.fr       */
+/*   Updated: 2022/10/13 21:37:22 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void	do_command(char **cmd_and_args, int nb_command)
 	if (nb_command == 2)
 		g_sh.err_exit = ft_pwd();
 	if (nb_command == 3)
-		ft_export(cmd_and_args);
+		g_sh.err_exit = ft_export(cmd_and_args);
 	if (nb_command == 4)
 		g_sh.err_exit = ft_unset(cmd_and_args);
 	if (nb_command == 5)
-		ft_env();
+		g_sh.err_exit = ft_env();
 	if (nb_command == 6)
 		ft_exit(cmd_and_args);
 	if (g_sh.err_exit == 1)
 		printf("Command error: %s\n", cmd_and_args[0]);
+	ft_set_env(ft_itoa(g_sh.err_exit), "?");
 }

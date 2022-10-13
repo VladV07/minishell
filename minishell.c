@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/13 19:33:39 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/13 21:28:24 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**ft_cpy_env(char **nenv, char **env)
 	i = -1;
 	while (env[++i])
 	{
-		nenv[i] = (char *)malloc(sizeof(char *) * ft_strlen(env[i]));
+		nenv[i] = (char *)malloc(sizeof(char) * ft_strlen(env[i]));
 		nenv[i] = ft_memcpy(nenv[i], env[i], ft_strlen(env[i]));
 	}
 	return (nenv);
@@ -64,6 +64,7 @@ void	init_shell(char **env)
 	g_sh.commands[6] = ft_strdup("exit");
 	g_sh.commands[7] = NULL;
 	ft_get_in_env(env);
+	g_sh.env = ft_norm_help(g_sh.env, "?");
 }
 
 /* тут последовательно перебираем '' \ "" $ ; | > >> < ' '  */

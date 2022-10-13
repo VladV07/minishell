@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:55:17 by njohanne          #+#    #+#             */
-/*   Updated: 2022/10/13 21:21:24 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/13 21:36:25 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,11 @@ char	**ft_env_join(char **env, char **arv)
 	return (nenv);
 }
 
-void	ft_export(char **cmd_and_args)
+int	ft_export(char **cmd_and_args)
 {
 	if (cmd_and_args[1])
 		g_sh.env = ft_env_join(g_sh.env, cmd_and_args);
 	else
 		ft_print_env();
+	return (0);
 }

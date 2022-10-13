@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:02:16 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/12 15:48:28 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/13 21:35:45 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**ft_cpyenv(char **str, char **nenv)
 	return (nenv);
 }
 
-void	ft_env(void)
+int	ft_env(void)
 {
 	char	**nenv;
 	int		i;
@@ -67,4 +67,5 @@ void	ft_env(void)
 	while (nenv[++i])
 		printf("%s\n", nenv[i]);
 	free (nenv);
+	return (0);
 }

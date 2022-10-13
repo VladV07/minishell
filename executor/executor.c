@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlad <vlad@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:52:46 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/11 00:39:04 by vlad             ###   ########.fr       */
+/*   Updated: 2022/10/13 21:50:17 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	go_on_commands(char **res_pars, int *j, int *get_command)
 		{
 			do_command(res_pars, *j);
 			g_sh.err_exit = 0;
-			printf("res ft_set_env = %d\n", ft_set_env("QSD", "QGH")); //не работает функция =1
 			*get_command = 1;
 		}
 		(*j)++;
@@ -67,6 +66,7 @@ void	if_not_in_commands(int *get_command, int *ret)
 {
 	if (*get_command == 0)
 	{
+		ft_set_env("0", "?");
 		*ret = fork();
 		if (*ret == 0)
 		{
