@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_in_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlad <vlad@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:24:11 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/11 01:17:19 by vlad             ###   ########.fr       */
+/*   Updated: 2022/10/13 19:34:17 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*go_on_env(char **env, char *key)
 			}
 		}
 	}
-	tmp = strdup("");
+	tmp = ft_strdup("");
 	return (tmp);
 }
 

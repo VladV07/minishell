@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:02:38 by njohanne          #+#    #+#             */
-/*   Updated: 2022/10/06 20:41:48 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:39:35 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ char	**ft_work_nenv(char **nenv, int equals, char *str)
 				printf("%s\n\n", g_sh.env[i]);
 				nenv[++j] = (char *)malloc(sizeof(char) \
 					* ft_strlen(g_sh.env[i]));
-				nenv[j] = memcpy(nenv[j], g_sh.env[i], ft_strlen(g_sh.env[i]));
+				nenv[j] = ft_memcpy(nenv[j], g_sh.env[i], \
+					ft_strlen(g_sh.env[i]));
 			}
 		}
 	}

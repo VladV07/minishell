@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:33:55 by njohanne          #+#    #+#             */
-/*   Updated: 2022/09/09 15:39:47 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:37:19 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@ int	ft_pwd(void)
 	if (getcwd(dir, 1024) == NULL)
 		return (1);
 	printf("%s\n", dir);
-	printf("!!!!!!!!!!!!!!!!!!!!!pwd!!!!!!!!!!!!!!!!!!!!!!!!!");
 	return (0);
 }

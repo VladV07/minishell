@@ -6,7 +6,7 @@
 /*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:55:17 by njohanne          #+#    #+#             */
-/*   Updated: 2022/10/01 16:08:08 by njohanne         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:37:05 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,4 @@ void	ft_export(char **cmd_and_args)
 		g_sh.env = ft_env_join(g_sh.env, cmd_and_args);
 	else
 		ft_print_env();
-	printf("!!!!!!!!!!!!!!!!export!!!!!!!!!!!!!!!!!!!!!!");
 }

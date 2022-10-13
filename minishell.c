@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlad <vlad@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: njohanne <njohanne@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:06:00 by stapioca          #+#    #+#             */
-/*   Updated: 2022/10/10 23:19:51 by vlad             ###   ########.fr       */
+/*   Updated: 2022/10/13 19:33:39 by njohanne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ char	**ft_cpy_env(char **nenv, char **env)
 	i = -1;
 	while (env[++i])
 	{
-		nenv[i] = (char *)malloc(sizeof(char *) * strlen(env[i]));
-		nenv[i] = memcpy(nenv[i], env[i], strlen(env[i]));
+		nenv[i] = (char *)malloc(sizeof(char *) * ft_strlen(env[i]));
+		nenv[i] = ft_memcpy(nenv[i], env[i], ft_strlen(env[i]));
 	}
 	return (nenv);
 }
